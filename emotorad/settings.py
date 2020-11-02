@@ -77,16 +77,28 @@ WSGI_APPLICATION = 'emotorad.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'dev',
-        'USER': 'dev',
-        'PASSWORD': 'admin@dev',
-        'HOST': 'emotorad.chvomu8aainz.ap-south-1.rds.amazonaws.com',
-        'PORT': '5432',
+if os.environ["SERVER"] == "development":
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': 'dev',
+            'USER': 'dev',
+            'PASSWORD': 'admin@dev',
+            'HOST': 'emotorad.chvomu8aainz.ap-south-1.rds.amazonaws.com',
+            'PORT': '5432',
+        }
     }
-}
+else:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME': os.environ["DB_NAME"],
+            'USER':  os.environ["DB_USER_NAME"],
+            'PASSWORD': os.environ["DB_PASSWORD"],
+            'HOST': os.environ["DB_HOST"],
+            'PORT': '5432',
+        }
+    }
 
 
 # Password validation
@@ -121,7 +133,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-# 
+#
 # AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
 # AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
