@@ -1,4 +1,6 @@
 import uuid
+import random
+import string
 from django.db import models
 from django_better_admin_arrayfield.models.fields import ArrayField
 
@@ -86,6 +88,7 @@ class Cart(models.Model):
 
 
 class UserAddress(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     full_name = models.CharField(max_length=255, null=True, blank=True, default='')
     phone_number = models.CharField(max_length=255, null=True, blank=True, default='')
@@ -113,15 +116,20 @@ class Order(models.Model):
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
+    def save(self, *args, **kwargs):
+        if not self.id:
+            self.id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+        super(Order, self).save(*args, **kwargs)
+
     class Meta:
         db_table = 'order'
 
 
 class OrderItem(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
-    status = models.CharField(max_length=32, default=ORDER_VIRTUAL)
     amount = models.IntegerField(default=0)
+    quantity = models.IntegerField(default=1)
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:

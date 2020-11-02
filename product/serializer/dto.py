@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Product, ProductContent, Cart
+from core.models import Product, ProductContent, Cart, Order, OrderItem
 
 
 class ProductDto(serializers.ModelSerializer):
@@ -22,3 +22,23 @@ class CartDto(serializers.ModelSerializer):
     class Meta:
         model = Cart
         fields = ('quantity', 'product')
+
+
+class OrderItemDto(serializers.ModelSerializer):
+    product = ProductDto()
+
+    class Meta:
+        model = OrderItem
+        fields = ('quantity', 'product', 'amount')
+
+
+class OrderDto(serializers.ModelSerializer):
+    order_items = serializers.SerializerMethodField()
+
+    class Meta:
+        model = Order
+        fields = ('order_items', 'base_amount', 'id', 'total_amount', 'status')
+
+    def get_order_items(self, obj):
+        order_items = OrderItem.objects.filter(order=obj).all()
+        return OrderItemDto(order_items, many=True).data
