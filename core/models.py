@@ -103,6 +103,11 @@ class UserAddress(models.Model):
     class Meta:
         db_table = 'user_address'
 
+    def __str__(self):
+        return "{}({})\n{}\n{}\n{}\n{}".format(self.full_name,
+                                               self.phone_number, self.addless_line_1, self.addless_line_2, self.landmark,
+                                               self.city, self.state, self.pincode)
+
 
 class Order(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
@@ -124,6 +129,9 @@ class Order(models.Model):
     class Meta:
         db_table = 'order'
 
+    def __str__(self):
+        return str(self.id)
+
 
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
@@ -134,6 +142,9 @@ class OrderItem(models.Model):
 
     class Meta:
         db_table = 'order_item'
+
+    def __str__(self):
+        return str(self.order.id + "  " + self.product.name)
 
 
 class Transaction(models.Model):
