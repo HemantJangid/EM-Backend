@@ -4,6 +4,7 @@ from django_better_admin_arrayfield.models.fields import ArrayField
 
 PRODUCT_VEHICLE = 'VEHICLE'
 PRODUCT_ACCESSORY = 'ACCESSORY'
+ORDER_VIRTUAL = 'VIRTUAL'
 
 
 def get_default_json():
@@ -82,3 +83,57 @@ class Cart(models.Model):
 
     class Meta:
         db_table = 'cart'
+
+
+class UserAddress(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    full_name = models.CharField(max_length=255, null=True, blank=True, default='')
+    phone_number = models.CharField(max_length=255, null=True, blank=True, default='')
+    pincode = models.CharField(max_length=255, null=True, blank=True, default='')
+    addless_line_1 = models.CharField(max_length=255, null=True, blank=True, default='')
+    addless_line_2 = models.CharField(max_length=255, null=True, blank=True, default='')
+    landmark = models.CharField(max_length=255, null=True, blank=True, default='')
+    city = models.CharField(max_length=255, null=True, blank=True, default='')
+    state = models.CharField(max_length=255, null=True, blank=True, default='')
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'user_address'
+
+
+class Order(models.Model):
+    id = models.CharField(max_length=255, primary_key=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user_address = models.ForeignKey(UserAddress, on_delete=models.CASCADE)
+    status = models.CharField(max_length=32, default=ORDER_VIRTUAL)
+    base_amount = models.IntegerField(default=0)
+    total_amount = models.IntegerField(default=0)
+    gst_amount = models.IntegerField(default=0)
+    discount_amount = models.IntegerField(default=0)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'order'
+
+
+class OrderItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    status = models.CharField(max_length=32, default=ORDER_VIRTUAL)
+    amount = models.IntegerField(default=0)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'order_item'
+
+
+class Transaction(models.Model):
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    transaction_id = models.CharField(max_length=255)
+    medium = models.CharField(max_length=255)
+    amount = models.IntegerField(default=0)
+    created_on = models.DateTimeField(auto_now_add=True)
+
+    class Meta:
+        db_table = 'transaction'
