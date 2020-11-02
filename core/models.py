@@ -14,6 +14,20 @@ def get_default_list():
     return []
 
 
+class User(models.Model):
+    id = models.CharField(max_length=255, primary_key=True)
+    name = models.CharField(max_length=255, null=True, blank=True, default='')
+    email = models.CharField(max_length=255, null=True, blank=True, default='')
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'user'
+
+    def __str__(self):
+        return str(self.id)
+
+
 class Product(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     name = models.CharField(max_length=255, unique=True)
@@ -34,12 +48,12 @@ class Product(models.Model):
 
 
 class ProductContent(models.Model):
-    product = models.OneToOneField(Product, on_delete=models.CASCADE, unique=True)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
     landing_page_content = models.TextField(null=True, blank=True)
-    landing_page_image = models.CharField(max_length=255, null=True, blank=True)
+    landing_page_image = models.CharField(max_length=255, null=True, blank=True, default='')
     info_page_content_1 = models.TextField(null=True, blank=True)
     info_page_content_2 = models.TextField(null=True, blank=True)
-    video_page_video_link = models.CharField(max_length=255, null=True, blank=True)
+    video_page_video_link = models.CharField(max_length=255, null=True, blank=True, default='')
     stats_page_heading = models.TextField(null=True, blank=True)
     stats_page_content = models.TextField(null=True, blank=True)
     stats_page_metrics = models.JSONField(default=get_default_json, blank=True)
@@ -57,3 +71,14 @@ class ProductContent(models.Model):
 
     def __str__(self):
         return str(self.product.name)
+
+
+class Cart(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    quantity = models.IntegerField(default=1)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'cart'
