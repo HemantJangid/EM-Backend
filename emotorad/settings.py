@@ -121,13 +121,13 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
-AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-AWS_STORAGE_BUCKET_NAME = os.environ["BUCKET_NAME"]
-AWS_S3_REGION_NAME = 'ap-south-1'
-AWS_DEFAULT_ACL = 'public-read'
+# 
+# AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
+# AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
+# DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_STORAGE_BUCKET_NAME = os.environ["BUCKET_NAME"]
+# AWS_S3_REGION_NAME = 'ap-south-1'
+# AWS_DEFAULT_ACL = 'public-read'
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
