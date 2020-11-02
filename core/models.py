@@ -24,3 +24,19 @@ class Product(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+
+class ProductContent(models.Model):
+    product = models.OneToOneField(Product, on_delete=models.CASCADE, unique=True)
+    landing_page_content = models.TextField(null=True, blank=True)
+    landing_page_image = models.FileField(null=True, blank=True)
+    info_page_content_1 = models.TextField(null=True, blank=True)
+    info_page_content_2 = models.TextField(null=True, blank=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'product_content'
+
+    def __str__(self):
+        return str(self.product.name)
