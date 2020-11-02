@@ -40,7 +40,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'core',
     'product',
-    'storages'
+    'storages',
+    'django_better_admin_arrayfield'
 ]
 
 MIDDLEWARE = [
@@ -133,7 +134,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-#
+# Can be enabled for django storage
 # AWS_ACCESS_KEY_ID = os.environ["AWS_ACCESS_KEY_ID"]
 # AWS_SECRET_ACCESS_KEY = os.environ["AWS_SECRET_ACCESS_KEY"]
 # DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
