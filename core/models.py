@@ -47,8 +47,8 @@ class ProductContent(models.Model):
     features_page_content_1 = models.TextField(null=True, blank=True)
     features_page_metrics_1 = ArrayField(models.CharField(max_length=255), default=get_default_list, blank=True)
     features_page_metrics_2 = ArrayField(models.CharField(max_length=255), default=get_default_list, blank=True)
-    pricing_page_amount = models.CharField(max_length=255, null=True, blank=True)
-    pricing_page_emi = models.CharField(max_length=255, null=True, blank=True)
+    pricing_page_amount = models.CharField(max_length=255, null=True, blank=True, default='0')
+    pricing_page_emi = models.CharField(max_length=255, null=True, blank=True, default='0')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
