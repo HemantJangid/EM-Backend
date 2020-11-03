@@ -42,3 +42,14 @@ class OrderView(APIView):
             item.delete()
 
         return success(OrderDto(order).data, "order created successfully", True)
+
+
+class GetOrderView(APIView):
+
+    @auth_required()
+    def get(self, request, order_id):
+        order = Order.objects.filter(user=request.user, id=order_id).first()
+        if not order:
+            return success({}, "invalid order id", False)
+
+        return success(OrderDto(order).data, "order fetched successfully", True)
