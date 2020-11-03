@@ -7,6 +7,8 @@ from django_better_admin_arrayfield.models.fields import ArrayField
 PRODUCT_VEHICLE = 'VEHICLE'
 PRODUCT_ACCESSORY = 'ACCESSORY'
 ORDER_VIRTUAL = 'VIRTUAL'
+ORDER_PROCESSING = 'PROCESSING'
+ORDER_COMPLETED = 'COMPLETED'
 
 
 def get_default_json():
@@ -156,3 +158,6 @@ class Transaction(models.Model):
 
     class Meta:
         db_table = 'transaction'
+
+    def __str__(self):
+        return str(self.order.id + " - " + self.transaction_id)

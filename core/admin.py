@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, ProductContent, Order, OrderItem
+from .models import Product, ProductContent, Order, OrderItem, Transaction
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
 
@@ -29,6 +29,20 @@ class OrderAdmin(admin.ModelAdmin):
 
 @admin.register(OrderItem)
 class OrderItemAdmin(admin.ModelAdmin):
+    search_fields = ['order__id']
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(Transaction)
+class TransactionAdmin(admin.ModelAdmin):
     search_fields = ['order__id']
 
     def has_change_permission(self, request, obj=None):
