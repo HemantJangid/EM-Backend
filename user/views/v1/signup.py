@@ -22,4 +22,4 @@ class SignupView(APIView):
             user = User(id=user_id)
         user.save()
 
-        return success({}, "payment completed", True)
+        return success({}, "signup completed", True)
