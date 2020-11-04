@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'core',
     'product',
     'storages',
+    'user',
     'django_better_admin_arrayfield'
 ]
 
