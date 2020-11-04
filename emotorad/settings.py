@@ -25,8 +25,13 @@ SECRET_KEY = 'jv(%!owm^sqr0c!xhwph@0o^4q@d=7b!si43yxz!@pu!qws+g!'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
+# RAZORPAY_KEY_ID = os.environ['RAZORPAY_KEY_ID']
+# RAZORPAY_KEY_SECRET = os.environ['RAZORPAY_KEY_SECRET']
+
+RAZORPAY_KEY_ID = ""
+RAZORPAY_KEY_SECRET = ""
 
 # Application definition
 
