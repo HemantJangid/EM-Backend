@@ -146,7 +146,7 @@ class OrderItem(models.Model):
         db_table = 'order_item'
 
     def __str__(self):
-        return str(self.order.id + "  " + self.product.name)
+        return str(self.order.id)
 
 
 class Transaction(models.Model):
