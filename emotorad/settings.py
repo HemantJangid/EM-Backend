@@ -77,8 +77,9 @@ WSGI_APPLICATION = 'emotorad.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
+SERVER = os.environ["SERVER"]
 
-if os.environ["SERVER"] == "development":
+if SERVER == "development":
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.postgresql_psycopg2',
