@@ -64,6 +64,7 @@ class ProductContent(models.Model):
     stats_page_content = models.TextField(null=True, blank=True)
     stats_page_metrics = models.JSONField(default=get_default_json, blank=True)
     features_page_heading_1 = models.TextField(null=True, blank=True)
+    features_page_heading_2 = models.TextField(null=True, blank=True)
     features_page_content_1 = models.TextField(null=True, blank=True)
     features_page_metrics_1 = ArrayField(models.CharField(max_length=255), default=get_default_list, blank=True)
     features_page_metrics_2 = ArrayField(models.CharField(max_length=255), default=get_default_list, blank=True)
