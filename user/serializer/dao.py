@@ -14,3 +14,7 @@ class AddAddressDao(serializers.Serializer):
     landmark = serializers.CharField(max_length=255, required=False, default='', allow_blank=True)
     city = serializers.CharField(max_length=255)
     state = serializers.CharField(max_length=255)
+
+
+class DeleteAddressDao(serializers.Serializer):
+    address_uuid = serializers.CharField(max_length=255)
