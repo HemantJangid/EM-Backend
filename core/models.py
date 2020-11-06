@@ -41,6 +41,8 @@ class Product(models.Model):
                             choices=[(PRODUCT_ACCESSORY, PRODUCT_ACCESSORY), (PRODUCT_VEHICLE, PRODUCT_VEHICLE)])
     maximum_retail_price = models.IntegerField(default=0)
     selling_price = models.IntegerField(default=0)
+    model_number = models.CharField(max_length=255, null=True, blank=True, default='')
+    image_url = models.CharField(max_length=255, null=True, blank=True, default='')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     is_archived = models.BooleanField(default=False)
