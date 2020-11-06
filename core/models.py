@@ -99,11 +99,12 @@ class UserAddress(models.Model):
     full_name = models.CharField(max_length=255, null=True, blank=True, default='')
     phone_number = models.CharField(max_length=255, null=True, blank=True, default='')
     pincode = models.CharField(max_length=255, null=True, blank=True, default='')
-    addless_line_1 = models.CharField(max_length=255, null=True, blank=True, default='')
-    addless_line_2 = models.CharField(max_length=255, null=True, blank=True, default='')
+    address_line_1 = models.CharField(max_length=255, null=True, blank=True, default='')
+    address_line_2 = models.CharField(max_length=255, null=True, blank=True, default='')
     landmark = models.CharField(max_length=255, null=True, blank=True, default='')
     city = models.CharField(max_length=255, null=True, blank=True, default='')
     state = models.CharField(max_length=255, null=True, blank=True, default='')
+    is_deleted = models.BooleanField(default=False)
     created_on = models.DateTimeField(auto_now_add=True)
 
     class Meta:
@@ -111,7 +112,7 @@ class UserAddress(models.Model):
 
     def __str__(self):
         return "{}({})\n{}\n{}\n{}\n{}".format(self.full_name,
-                                               self.phone_number, self.addless_line_1, self.addless_line_2, self.landmark,
+                                               self.phone_number, self.address_line_1, self.address_line_2, self.landmark,
                                                self.city, self.state, self.pincode)
 
 
