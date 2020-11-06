@@ -8,3 +8,7 @@ class OrderDao(serializers.Serializer):
 class PayOrdeRazorpayDao(serializers.Serializer):
     razorpay_id = serializers.CharField(max_length=255)
     order_id = serializers.CharField(max_length=255)
+
+
+class AddCartDao(serializers.Serializer):
+    quantity = serializers.IntegerField()

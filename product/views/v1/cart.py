@@ -1,7 +1,8 @@
 from rest_framework.views import APIView
 from core.models import Product, Cart
-from middleware.response import success
+from middleware.response import success, bad_request
 from middleware.request import auth_required
+from product.serializer.dao import AddCartDao
 from product.serializer.dto import CartDto
 
 
@@ -9,6 +10,10 @@ class CartView(APIView):
 
     @auth_required()
     def post(self, request, product_id):
+        attributes = AddCartDao(data=request.data)
+        if not attributes.is_valid():
+            return bad_request(attributes.errors)
+
         product = Product.objects.filter(uuid=product_id, is_archived=False).first()
         if not product:
             return success({}, "invalid product id", False)
@@ -19,8 +24,9 @@ class CartView(APIView):
         cart = Cart.objects.filter(product=product, user=request.user).first()
         if not cart:
             cart = Cart(product=product, user=request.user)
+            cart.quantity = attributes.data["quantity"]
         else:
-            cart.quantity += 1
+            cart.quantity += attributes.data["quantity"]
         cart.save()
 
         return success({}, "product added successfully", True)
