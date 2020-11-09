@@ -27,11 +27,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-# RAZORPAY_KEY_ID = os.environ['RAZORPAY_KEY_ID']
-# RAZORPAY_KEY_SECRET = os.environ['RAZORPAY_KEY_SECRET']
-
-RAZORPAY_KEY_ID = ""
-RAZORPAY_KEY_SECRET = ""
+RAZORPAY_KEY_ID = os.environ['RAZORPAY_KEY_ID']
+RAZORPAY_KEY_SECRET = os.environ['RAZORPAY_KEY_SECRET']
 
 # Application definition
 
