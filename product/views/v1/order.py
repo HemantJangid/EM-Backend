@@ -24,7 +24,7 @@ class OrderView(APIView):
 
         total_amount = 0
         for item in cart:
-            total_amount += item.product.selling_price
+            total_amount += (item.product.selling_price * item.quantity)
 
         order = Order(total_amount=total_amount, user=request.user, user_address=user_address, base_amount=total_amount)
         order.save()

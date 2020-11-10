@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Product, ProductContent, Cart, Order, OrderItem
+from core.models import Product, ProductContent, Cart, Order, OrderItem, UserAddress
 
 
 class ProductDto(serializers.ModelSerializer):
@@ -33,12 +33,20 @@ class OrderItemDto(serializers.ModelSerializer):
         fields = ('quantity', 'product', 'amount')
 
 
+class UserAddressDto(serializers.ModelSerializer):
+    class Meta:
+        model = UserAddress
+        fields = ('uuid', 'full_name', 'phone_number', 'pincode', 'address_line_1', 'address_line_2', 'landmark', 'city',
+                  'state')
+
+
 class OrderDto(serializers.ModelSerializer):
     order_items = serializers.SerializerMethodField()
+    user_address = UserAddressDto()
 
     class Meta:
         model = Order
-        fields = ('order_items', 'base_amount', 'id', 'total_amount', 'status')
+        fields = ('order_items', 'base_amount', 'id', 'total_amount', 'status', 'user_address')
 
     def get_order_items(self, obj):
         order_items = OrderItem.objects.filter(order=obj).all()
