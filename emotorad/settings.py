@@ -27,8 +27,10 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
+SERVER = os.environ["SERVER"]
 RAZORPAY_KEY_ID = os.environ['RAZORPAY_KEY_ID']
 RAZORPAY_KEY_SECRET = os.environ['RAZORPAY_KEY_SECRET']
+SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
 
 # Application definition
 
@@ -103,7 +105,6 @@ CORS_ALLOW_HEADERS = [
 
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
-SERVER = os.environ["SERVER"]
 
 if SERVER == "development":
     DATABASES = {

@@ -18,3 +18,9 @@ class AddAddressDao(serializers.Serializer):
 
 class DeleteAddressDao(serializers.Serializer):
     address_uuid = serializers.CharField(max_length=255)
+
+
+class SendEmailDao(serializers.Serializer):
+    email = serializers.CharField()
+    subject = serializers.CharField()
+    message = serializers.CharField()
