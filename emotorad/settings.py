@@ -23,11 +23,17 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'jv(%!owm^sqr0c!xhwph@0o^4q@d=7b!si43yxz!@pu!qws+g!'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+
 
 ALLOWED_HOSTS = ['*']
 
 SERVER = os.environ["SERVER"]
+
+if SERVER == "production":
+    DEBUG = False
+else:
+    DEBUG = True
+
 RAZORPAY_KEY_ID = os.environ['RAZORPAY_KEY_ID']
 RAZORPAY_KEY_SECRET = os.environ['RAZORPAY_KEY_SECRET']
 SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
