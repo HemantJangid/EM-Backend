@@ -13,6 +13,9 @@ class UserProfileView(APIView):
         if not attributes.is_valid():
             return bad_request(attributes.errors)
 
-        User.objects.filter(id=request.user.id).update(**attributes.data)
+        User.objects.filter(id=request.user.id).update(
+            phone_number=attributes.data["phone_number"],
+            email=attributes.data["email"],
+            name=str(attributes.data["first_name"] + " " + attributes.data["last_name"]).strip())
 
         return success({}, "profile updated successfully", True)

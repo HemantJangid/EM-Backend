@@ -27,4 +27,7 @@ class SendEmailDao(serializers.Serializer):
 
 
 class UserProfileDao(serializers.Serializer):
+    first_name = serializers.CharField(max_length=255)
+    last_name = serializers.CharField(max_length=255, required=False, default='', allow_blank=True)
+    email = serializers.CharField(max_length=255)
     phone_number = serializers.CharField(max_length=14)
