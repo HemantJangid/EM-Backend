@@ -24,3 +24,7 @@ class SendEmailDao(serializers.Serializer):
     email = serializers.CharField()
     subject = serializers.CharField()
     message = serializers.CharField()
+
+
+class UserProfileDao(serializers.Serializer):
+    phone_number = serializers.CharField(max_length=14)
