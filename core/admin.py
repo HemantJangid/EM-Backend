@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Product, ProductContent, Order, OrderItem, Transaction
+from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
 
@@ -56,3 +56,8 @@ class TransactionAdmin(admin.ModelAdmin):
 
     def has_delete_permission(self, request, obj=None):
         return False
+
+
+@admin.register(Warranty)
+class WarrantyAdmin(admin.ModelAdmin):
+    readonly_fields = ('id', 'user')

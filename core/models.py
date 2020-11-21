@@ -175,3 +175,16 @@ class Transaction(models.Model):
 
     def __str__(self):
         return str(self.order.id + " - " + self.transaction_id)
+
+
+class Warranty(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    frame_number = models.CharField(max_length=255, unique=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'warranty'
+
+    def __str__(self):
+        return str(self.frame_number)
