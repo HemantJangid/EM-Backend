@@ -12,3 +12,7 @@ class PayOrdeRazorpayDao(serializers.Serializer):
 
 class AddCartDao(serializers.Serializer):
     quantity = serializers.IntegerField()
+
+
+class WarrantyDao(serializers.Serializer):
+    frame_number = serializers.CharField(max_length=255)
