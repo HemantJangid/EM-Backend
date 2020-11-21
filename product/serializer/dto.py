@@ -14,7 +14,9 @@ class ProductContentDto(serializers.ModelSerializer):
         fields = ('landing_page_content', 'info_page_content_1', 'video_page_video_link', 'stats_page_heading',
                   'stats_page_content', 'stats_page_metrics', 'features_page_heading_1', 'features_page_content_1',
                   'features_page_metrics_1', 'info_page_content_2', 'pricing_page_amount', 'pricing_page_emi',
-                  'features_page_heading_2', 'landing_page_image', 'features_page_metrics_2')
+                  'features_page_heading_2', 'landing_page_image', 'features_page_metrics_2', 'primary_color',
+                  'info_page_bg_image_url', 'info_4_bg_image_1', 'info_4_bg_image_2', 'whats_more_bg_image',
+                  'features_page_main_stat')
 
 
 class CartDto(serializers.ModelSerializer):

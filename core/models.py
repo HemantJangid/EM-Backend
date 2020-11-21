@@ -73,6 +73,14 @@ class ProductContent(models.Model):
     features_page_metrics_2 = ArrayField(models.CharField(max_length=255), default=get_default_list, blank=True)
     pricing_page_amount = models.CharField(max_length=255, null=True, blank=True, default='0')
     pricing_page_emi = models.CharField(max_length=255, null=True, blank=True, default='0')
+
+    primary_color = models.CharField(max_length=255, null=True, blank=True, default='')
+    info_page_bg_image_url = models.CharField(max_length=255, null=True, blank=True, default='')
+    info_4_bg_image_1 = models.CharField(max_length=255, null=True, blank=True, default='')
+    info_4_bg_image_2 = models.CharField(max_length=255, null=True, blank=True, default='')
+    whats_more_bg_image = models.CharField(max_length=255, null=True, blank=True, default='')
+    features_page_main_stat = models.JSONField(default=get_default_json, blank=True)
+
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
