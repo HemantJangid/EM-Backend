@@ -43,7 +43,7 @@ class Product(models.Model):
     maximum_retail_price = models.IntegerField(default=0)
     selling_price = models.IntegerField(default=0)
     model_number = models.CharField(max_length=255, null=True, blank=True, default='')
-    slug = models.CharField(max_length=255, default="")
+    slug = models.CharField(max_length=255, default="", unique=True)
     image_url = models.CharField(max_length=255, null=True, blank=True, default='')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
