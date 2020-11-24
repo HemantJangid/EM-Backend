@@ -1,7 +1,7 @@
 import requests
 from emotorad.settings import WEBHOOK
 from django.contrib import admin
-from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty
+from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty, Lead
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
 
@@ -70,6 +70,22 @@ class TransactionAdmin(admin.ModelAdmin):
 @admin.register(Warranty)
 class WarrantyAdmin(admin.ModelAdmin):
     readonly_fields = ('id', 'user')
+
+
+@admin.register(Lead)
+class LeadAdmin(admin.ModelAdmin):
+    search_fields = ['form_name']
+    list_display = ('name', 'phone', 'email', 'form_name')
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
 
 
 def call_webhook():

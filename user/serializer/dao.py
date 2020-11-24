@@ -26,6 +26,15 @@ class SendEmailDao(serializers.Serializer):
     message = serializers.CharField()
 
 
+class LeadDao(serializers.Serializer):
+    name = serializers.CharField()
+    phone = serializers.CharField()
+    email = serializers.CharField()
+    city = serializers.CharField(max_length=255, required=False, default='', allow_blank=True)
+    form_name = serializers.CharField()
+    meta = serializers.DictField(child=serializers.CharField(), allow_empty=True)
+
+
 class UserProfileDao(serializers.Serializer):
     first_name = serializers.CharField(max_length=255)
     last_name = serializers.CharField(max_length=255, required=False, default='', allow_blank=True)
