@@ -189,3 +189,19 @@ class Warranty(models.Model):
 
     def __str__(self):
         return str(self.frame_number)
+
+
+class Lead(models.Model):
+    name = models.CharField(max_length=255, null=True, blank=True, default='')
+    phone = models.CharField(max_length=255, null=True, blank=True, default='')
+    email = models.CharField(max_length=255, null=True, blank=True, default='')
+    city = models.CharField(max_length=255, null=True, blank=True, default='')
+    meta = models.TextField(null=True, blank=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'lead'
+
+    def __str__(self):
+        return str(self.name)
