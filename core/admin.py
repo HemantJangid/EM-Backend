@@ -1,3 +1,4 @@
+import requests
 from django.contrib import admin
 from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
@@ -7,10 +8,17 @@ from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 class ProductAdmin(admin.ModelAdmin):
     readonly_fields = ('uuid',)
 
+    def save_model(self, request, obj, form, change):
+        call_webhook()
+        return super(ProductAdmin, self).save_model(request, obj, form, change)
+
 
 @admin.register(ProductContent)
 class ProducContentAdmin(admin.ModelAdmin, DynamicArrayMixin):
-    pass
+
+    def save_model(self, request, obj, form, change):
+        call_webhook()
+        return super(ProducContentAdmin, self).save_model(request, obj, form, change)
 
 
 @admin.register(Order)
@@ -61,3 +69,14 @@ class TransactionAdmin(admin.ModelAdmin):
 @admin.register(Warranty)
 class WarrantyAdmin(admin.ModelAdmin):
     readonly_fields = ('id', 'user')
+
+
+def call_webhook():
+    url = "https://webhook.gatsbyjs.com/hooks/data_source/db743eee-1078-4b82-bf79-39a0a8e43b72"
+    payload = "{}"
+    headers = {
+      'Content-Type': 'application/json'
+    }
+
+    response = requests.request("POST", url, headers=headers, data=payload)
+    print(response.status_code)
