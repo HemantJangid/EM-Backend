@@ -30,8 +30,10 @@ ALLOWED_HOSTS = ['*']
 SERVER = os.environ["SERVER"]
 
 if SERVER == "production":
+    WEBHOOK = "https://webhook.gatsbyjs.com/hooks/data_source/publish/db743eee-1078-4b82-bf79-39a0a8e43b72"
     DEBUG = False
 else:
+    WEBHOOK = "https://webhook.gatsbyjs.com/hooks/data_source/db743eee-1078-4b82-bf79-39a0a8e43b72"
     DEBUG = True
 
 RAZORPAY_KEY_ID = os.environ['RAZORPAY_KEY_ID']

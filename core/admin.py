@@ -1,4 +1,5 @@
 import requests
+from emotorad.settings import WEBHOOK
 from django.contrib import admin
 from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
@@ -72,7 +73,7 @@ class WarrantyAdmin(admin.ModelAdmin):
 
 
 def call_webhook():
-    url = "https://webhook.gatsbyjs.com/hooks/data_source/db743eee-1078-4b82-bf79-39a0a8e43b72"
+    url = WEBHOOK
     payload = "{}"
     headers = {
       'Content-Type': 'application/json'
