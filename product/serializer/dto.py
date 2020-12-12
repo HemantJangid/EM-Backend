@@ -5,7 +5,8 @@ from core.models import Product, ProductContent, Cart, Order, OrderItem, UserAdd
 class ProductDto(serializers.ModelSerializer):
     class Meta:
         model = Product
-        fields = ('uuid', 'name', 'is_out_of_stock', 'selling_price', 'model_number', 'image_url', 'slug')
+        fields = ('uuid', 'name', 'is_out_of_stock', 'selling_price', 'model_number', 'image_url', 'slug', 'title',
+                  'bg_image')
 
 
 class ProductContentDto(serializers.ModelSerializer):

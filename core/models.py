@@ -45,6 +45,8 @@ class Product(models.Model):
     model_number = models.CharField(max_length=255, null=True, blank=True, default='')
     slug = models.CharField(max_length=255, default="", unique=True)
     image_url = models.CharField(max_length=255, null=True, blank=True, default='')
+    bg_image = models.CharField(max_length=255, null=True, blank=True, default='')
+    title = models.CharField(max_length=255, null=True, blank=True, default='')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     is_archived = models.BooleanField(default=False)
