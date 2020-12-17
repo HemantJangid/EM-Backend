@@ -16,3 +16,7 @@ class AddCartDao(serializers.Serializer):
 
 class WarrantyDao(serializers.Serializer):
     frame_number = serializers.CharField(max_length=255)
+
+
+class InsuranceDao(serializers.Serializer):
+    frame_number = serializers.CharField(max_length=255)
