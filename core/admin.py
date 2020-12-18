@@ -1,6 +1,8 @@
 import requests
 from emotorad.settings import WEBHOOK
 from django.contrib import admin
+from django.urls import reverse
+from django.utils.html import format_html
 from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty, Lead
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
@@ -55,7 +57,12 @@ class OrderItemAdmin(admin.ModelAdmin):
 @admin.register(Transaction)
 class TransactionAdmin(admin.ModelAdmin):
     search_fields = ['order__id']
-    list_display = ('order', 'transaction_id', 'medium')
+    list_display = ('transaction_id', 'medium', 'order_details')
+
+    def order_details(self, obj):
+        link = reverse("admin:core_order_change", args=[obj.order.id])
+        return format_html('<a href="{0}">{1}</a>'.format(link, obj.order_id))
+    order_details.allow_tags = True
 
     def has_change_permission(self, request, obj=None):
         return False
