@@ -24,7 +24,7 @@ def send_mail(reciever_email, subject, email_template, attachments=None):
             }
         ],
         "from": {
-            "email": "info@emotorad.com",
+            "email": "contact@emotorad.com",
             "name": "Emotorad"
         },
         "content": [
