@@ -11,6 +11,6 @@ class SendEmailView(APIView):
         if not attributes.is_valid():
             return bad_request(attributes.errors)
 
-        send_mail(attributes.data["email"], attributes.data["subject"], attributes.data["message"])
+        send_mail(attributes.data["email"].split(","), attributes.data["subject"], attributes.data["message"])
 
         return success({}, "email send successfully", True)
