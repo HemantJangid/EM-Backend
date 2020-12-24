@@ -18,9 +18,6 @@ class CartView(APIView):
         if not product:
             return success({}, "invalid product id", False)
 
-        if product.is_out_of_stock:
-            return success({}, "product out of stock", False)
-
         cart = Cart.objects.filter(product=product, user=request.user).first()
         if not cart:
             cart = Cart(product=product, user=request.user)
