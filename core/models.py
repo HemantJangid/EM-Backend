@@ -208,3 +208,16 @@ class Lead(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+
+class InsuranceRequest(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    frame_number = models.CharField(max_length=255, unique=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'insurance_request'
+
+    def __str__(self):
+        return str(self.frame_number)
