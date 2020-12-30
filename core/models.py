@@ -221,3 +221,26 @@ class InsuranceRequest(models.Model):
 
     def __str__(self):
         return str(self.frame_number)
+
+
+class EmailLeadLogs(models.Model):
+    email = models.CharField(max_length=255)
+    subject = models.CharField(max_length=255)
+    form_name = models.CharField(max_length=255)
+    name = models.CharField(max_length=255, blank=True, null=True)
+    organization_name = models.CharField(max_length=255, blank=True, null=True)
+    address = models.CharField(max_length=255, blank=True, null=True)
+    country = models.CharField(max_length=255, blank=True, null=True)
+    city = models.CharField(max_length=255, blank=True, null=True)
+    phone = models.CharField(max_length=255, blank=True, null=True)
+    interest = models.CharField(max_length=255, blank=True, null=True)
+    remarks = models.CharField(max_length=255, blank=True, null=True)
+    cycle_id = models.CharField(max_length=255, blank=True, null=True)
+    product_id = models.CharField(max_length=255, blank=True, null=True)
+    product_name = models.CharField(max_length=255, blank=True, null=True)
+    preferred_date = models.CharField(max_length=255, blank=True, null=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'email_lead_logs'

@@ -20,10 +20,28 @@ class DeleteAddressDao(serializers.Serializer):
     address_uuid = serializers.CharField(max_length=255)
 
 
+class EmailLeadLogsDao(serializers.Serializer):
+    email = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    form_name = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    name = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    organization_name = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    address = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    country = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    city = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    phone = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    interest = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    remarks = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    cycle_id = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    product_id = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    product_name = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    preferred_date = serializers.CharField(max_length=255, required=False, allow_blank=True)
+
+
 class SendEmailDao(serializers.Serializer):
     email = serializers.CharField()
     subject = serializers.CharField()
     message = serializers.CharField()
+    meta = EmailLeadLogsDao()
 
 
 class LeadDao(serializers.Serializer):
