@@ -244,3 +244,6 @@ class EmailLeadLogs(models.Model):
 
     class Meta:
         db_table = 'email_lead_logs'
+
+    def __str__(self):
+        return str(self.email)

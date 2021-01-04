@@ -3,7 +3,7 @@ from emotorad.settings import WEBHOOK
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
-from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty, Lead
+from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty, Lead, EmailLeadLogs
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
 
@@ -14,6 +14,20 @@ class ProductAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         call_webhook()
         return super(ProductAdmin, self).save_model(request, obj, form, change)
+
+
+@admin.register(EmailLeadLogs)
+class EmailLeadLogsAdmin(admin.ModelAdmin):
+    search_fields = ['email', 'subject', 'form_name', 'name', 'address', 'phone', 'product_id', 'cycle_id', 'product_name']
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(ProductContent)
