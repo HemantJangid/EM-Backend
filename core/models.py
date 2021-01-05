@@ -82,6 +82,8 @@ class ProductContent(models.Model):
     info_4_bg_image_1 = models.CharField(max_length=255, null=True, blank=True, default='')
     info_4_bg_image_2 = models.CharField(max_length=255, null=True, blank=True, default='')
     whats_more_bg_image = models.CharField(max_length=255, null=True, blank=True, default='')
+    stats_bg_image = models.CharField(max_length=255, null=True, blank=True, default='')
+    whats_more_subtitle_text = models.TextField(null=True, blank=True)
     features_page_main_stat = models.JSONField(default=get_default_json, blank=True)
 
     created_on = models.DateTimeField(auto_now_add=True)
