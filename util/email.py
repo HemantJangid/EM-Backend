@@ -2,7 +2,7 @@ import sendgrid
 from emotorad.settings import SENDGRID_API_KEY
 
 
-def send_mail(reciever_email, subject, email_template, attachments=None):
+def send_mail(reciever_email, subject, email_template, attachments=None, send_at=None):
     sendgrid_object = sendgrid.SendGridAPIClient(apikey=SENDGRID_API_KEY)
 
     to = []
@@ -37,5 +37,8 @@ def send_mail(reciever_email, subject, email_template, attachments=None):
 
     if attachments:
         data["attachments"] = attachments
+
+    if send_at:
+        data["send_at"] = send_at
 
     sendgrid_object.client.mail.send.post(request_body=data)
