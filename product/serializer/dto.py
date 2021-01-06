@@ -1,5 +1,11 @@
 from rest_framework import serializers
-from core.models import Product, ProductContent, Cart, Order, OrderItem, UserAddress
+from core.models import Product, ProductContent, Cart, Order, OrderItem, UserAddress, Dealer
+
+
+class DealerDto(serializers.ModelSerializer):
+    class Meta:
+        model = Dealer
+        fields = ('name', 'phone_number', 'address', 'latitude', 'longitude', 'id')
 
 
 class ProductDto(serializers.ModelSerializer):

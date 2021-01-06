@@ -6,6 +6,7 @@ from .views.v1.order import OrderView, GetOrderView
 from .views.v1.transaction import PayOrderRazorapyView
 from .views.v1.warranty import WarrantyView
 from .views.v1.insurance import InsuranceView
+from .views.v1.dealer import DealerView
 
 
 urlpatterns = [
@@ -18,4 +19,5 @@ urlpatterns = [
     url(r'^v1/order/razorpay/pay$', PayOrderRazorapyView.as_view()),
     url(r'^v1/warranty$', WarrantyView.as_view()),
     url(r'^v1/insurance$', InsuranceView.as_view()),
+    url(r'^v1/dealer/list$', DealerView.as_view()),
 ]

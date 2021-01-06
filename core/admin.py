@@ -3,7 +3,7 @@ from emotorad.settings import WEBHOOK
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
-from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty, Lead, EmailLeadLogs
+from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty, Lead, EmailLeadLogs, Dealer
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 
 
@@ -107,6 +107,15 @@ class LeadAdmin(admin.ModelAdmin):
     def has_delete_permission(self, request, obj=None):
         return False
 
+
+@admin.register(Dealer)
+class DealerAdmin(admin.ModelAdmin):
+    search_fields = ['name', 'phone_number']
+    list_display = ('name', 'phone_number', 'address', 'is_active')
+
+    def save_model(self, request, obj, form, change):
+        call_webhook()
+        return super(DealerAdmin, self).save_model(request, obj, form, change)
 
 
 def call_webhook():

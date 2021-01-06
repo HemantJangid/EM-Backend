@@ -249,3 +249,20 @@ class EmailLeadLogs(models.Model):
 
     def __str__(self):
         return str(self.email)
+
+
+class Dealer(models.Model):
+    name = models.CharField(max_length=255)
+    phone_number = models.CharField(max_length=255)
+    latitude = models.FloatField()
+    longitude = models.FloatField()
+    address = models.TextField(null=True, blank=True)
+    is_active = models.BooleanField(default=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'dealer'
+
+    def __str__(self):
+        return str(self.name)
