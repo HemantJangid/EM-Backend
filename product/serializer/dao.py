@@ -20,3 +20,13 @@ class WarrantyDao(serializers.Serializer):
 
 class InsuranceDao(serializers.Serializer):
     frame_number = serializers.CharField(max_length=255)
+
+
+class TestRideBookingDao(serializers.Serializer):
+    name = serializers.CharField(max_length=255)
+    phone_number = serializers.CharField(max_length=255)
+    email = serializers.CharField(max_length=255)
+    city = serializers.CharField(max_length=255)
+    dealer_id = serializers.IntegerField()
+    preferred_date = serializers.DateField()
+    preferred_time = serializers.TimeField()

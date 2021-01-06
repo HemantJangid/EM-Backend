@@ -266,3 +266,21 @@ class Dealer(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+
+class TestRideBooking(models.Model):
+    name = models.CharField(max_length=255)
+    phone_number = models.CharField(max_length=255)
+    email = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    dealer = models.ForeignKey(Dealer, on_delete=models.CASCADE)
+    preferred_date = models.DateField()
+    preferred_time = models.TimeField()
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'test_ride_booking'
+
+    def __str__(self):
+        return str(self.name)
