@@ -276,6 +276,8 @@ class TestRideBooking(models.Model):
     dealer = models.ForeignKey(Dealer, on_delete=models.CASCADE)
     preferred_date = models.DateField()
     preferred_time = models.TimeField()
+    is_scheduled = models.BooleanField(default=False)
+    scheduled_at = models.DateTimeField(default=None, null=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
