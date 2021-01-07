@@ -16,7 +16,9 @@ class TestRideView(APIView):
         if not attributes.is_valid():
             return bad_request(attributes.errors)
 
-        dealer = Dealer.objects.filter(id=attributes.data["dealer_id"])
+        dealer = Dealer.objects.filter(id=attributes.data["dealer_id"]).first()
+        if not dealer:
+            return success({}, "invalid dealer", False)
 
         booking_id = TestRideBooking.objects.create(**attributes.data).id
         booking = TestRideBooking.objects.filter(id=booking_id).first()
@@ -29,7 +31,11 @@ class TestRideView(APIView):
         else:
             email_list = []
 
-        # send_mail(email_list, "Booking Confirmation", message)
+        if dealer.email:
+            email_list.append(dealer.email)
+
+        if email_list:
+            send_mail(email_list, "Booking Confirmation", message)
 
         now = datetime.datetime.utcnow() + datetime.timedelta(seconds=19800)
         booking_dt_local = datetime.datetime.combine(booking.preferred_date, booking.preferred_time)

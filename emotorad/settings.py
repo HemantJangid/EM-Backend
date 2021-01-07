@@ -39,7 +39,6 @@ else:
 RAZORPAY_KEY_ID = os.environ['RAZORPAY_KEY_ID']
 RAZORPAY_KEY_SECRET = os.environ['RAZORPAY_KEY_SECRET']
 SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
-SENDGRID_API_KEY = "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"
 
 # Application definition
 
