@@ -254,6 +254,8 @@ class EmailLeadLogs(models.Model):
 class Dealer(models.Model):
     name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=255)
+    city = models.CharField(max_length=255, default=None, null=True)
+    email = models.CharField(max_length=255, default=None, null=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
     address = models.TextField(null=True, blank=True)

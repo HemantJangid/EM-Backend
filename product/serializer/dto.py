@@ -5,7 +5,7 @@ from core.models import Product, ProductContent, Cart, Order, OrderItem, UserAdd
 class DealerDto(serializers.ModelSerializer):
     class Meta:
         model = Dealer
-        fields = ('name', 'phone_number', 'address', 'latitude', 'longitude', 'id')
+        fields = ('name', 'phone_number', 'address', 'latitude', 'longitude', 'id', 'city')
 
 
 class ProductDto(serializers.ModelSerializer):
