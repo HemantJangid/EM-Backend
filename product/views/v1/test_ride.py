@@ -2,7 +2,7 @@ import datetime
 import calendar
 from rest_framework.views import APIView
 from middleware.response import success, bad_request
-from core.models import TestRideBooking, Dealer
+from core.models import TestRideBooking, Dealer, Product
 from product.serializer.dao import TestRideBookingDao
 from util.template import get_booking_confirmation_template, booking_reminder_template
 from util.email import send_mail
@@ -20,7 +20,13 @@ class TestRideView(APIView):
         if not dealer:
             return success({}, "invalid dealer", False)
 
-        booking_id = TestRideBooking.objects.create(**attributes.data).id
+        product = Product.objects.filter(uuid=attributes.data["product_id"]).first()
+        if not product:
+            return success({}, "invalid product id", False)
+
+        data = attributes.data
+        data["product_id"] = product.id
+        booking_id = TestRideBooking.objects.create(**data).id
         booking = TestRideBooking.objects.filter(id=booking_id).first()
 
         message = get_booking_confirmation_template()

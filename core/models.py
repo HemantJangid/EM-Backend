@@ -462,6 +462,7 @@ class Dealer(models.Model):
 
 
 class TestRideBooking(models.Model):
+    product = models.ForeignKey(Product, on_delete=models.CASCADE, default=None, null=True)
     name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
