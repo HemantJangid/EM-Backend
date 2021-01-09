@@ -18,7 +18,7 @@ class Command(BaseCommand):
             send_at = booking_dt_local - datetime.timedelta(seconds=19800) - datetime.timedelta(hours=2)
             print("scheduling email for booking id", booking.id)
 
-            reminder_template = booking_reminder_template()
+            reminder_template = booking_reminder_template(booking)
             send_at_timestamp = calendar.timegm(send_at.timetuple())
             send_mail(booking.email, "Reminder", reminder_template, send_at=send_at_timestamp)
 

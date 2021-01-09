@@ -29,7 +29,7 @@ class TestRideView(APIView):
         booking_id = TestRideBooking.objects.create(**data).id
         booking = TestRideBooking.objects.filter(id=booking_id).first()
 
-        message = get_booking_confirmation_template()
+        message = get_booking_confirmation_template(booking)
         send_mail(attributes.data["email"], "Booking Confirmation", message)
 
         if SERVER == "production":
