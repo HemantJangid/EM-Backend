@@ -4,7 +4,8 @@ from rest_framework.views import APIView
 from middleware.response import success, bad_request
 from core.models import TestRideBooking, Dealer, Product
 from product.serializer.dao import TestRideBookingDao
-from util.template import get_booking_confirmation_template, booking_reminder_template
+from util.template import get_booking_confirmation_template_customer, booking_reminder_template, \
+                          get_booking_confirmation_template_dealer
 from util.email import send_mail
 from emotorad.settings import SERVER
 
@@ -29,8 +30,8 @@ class TestRideView(APIView):
         booking_id = TestRideBooking.objects.create(**data).id
         booking = TestRideBooking.objects.filter(id=booking_id).first()
 
-        message = get_booking_confirmation_template(booking)
-        send_mail(attributes.data["email"], "Booking Confirmation", message)
+        message = get_booking_confirmation_template_customer(booking)
+        send_mail(attributes.data["email"], "Test Ride Booking confirmed for " + product.name, message)
 
         if SERVER == "production":
             email_list = ["info@emotorad.com", "tech@emotorad.com"]
@@ -41,7 +42,8 @@ class TestRideView(APIView):
             email_list.append(dealer.email)
 
         if email_list:
-            send_mail(email_list, "Booking Confirmation", message)
+            message = get_booking_confirmation_template_dealer(booking)
+            send_mail(email_list, "Emotorad: Test ride booking confirmed for " + product.name, message)
 
         now = datetime.datetime.utcnow() + datetime.timedelta(seconds=19800)
         booking_dt_local = datetime.datetime.combine(booking.preferred_date, booking.preferred_time)
@@ -52,7 +54,8 @@ class TestRideView(APIView):
             send_at = booking_dt_local - datetime.timedelta(seconds=19800) - datetime.timedelta(hours=2)
             reminder_template = booking_reminder_template()
             send_at_timestamp = calendar.timegm(send_at.timetuple())
-            send_mail(attributes.data["email"], "Reminder", reminder_template, send_at=send_at_timestamp)
+            send_mail(attributes.data["email"], "Reminder: You have a test ride booking for " + product.name,
+                      reminder_template, send_at=send_at_timestamp)
 
             booking.is_scheduled = True
             booking.scheduled_at = datetime.datetime.utcnow()

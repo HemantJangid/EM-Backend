@@ -1,26 +1,56 @@
+import datetime
 
 
-def get_booking_confirmation_template(booking):
+def get_booking_confirmation_template_customer(booking):
+    booking_dt_local = datetime.datetime.combine(booking.preferred_date, booking.preferred_time)
     template = """
-        <b>Booking Date</b>: {0}<br>
-        <b>Booking Time</b>: {1}<br>
-        <b>Dealer Name</b>: {2}<br>
-        <b>Dealer Address</b>: {3}<br>
-        <b>Dealer City</b>: {4}<br>
-        <b>Product Name</b>: {5}<br>
-    """.format(booking.preferred_date, booking.preferred_time,
-               booking.dealer.name, booking.dealer.address, booking.dealer.city, booking.product.name)
+        Hi {0}<br><br>
+        Thanks for choosing Emotorad.<br><br>
+        Your booking for {1} at {2} is confirmed. Here are the booking details:<br><br>
+        <b>Store Name</b>: {3}<br>
+        <b>Store Address</b>: {4}<br>
+        <b>Store Location</b>: {5}<br>
+        <b>Booking Date</b>: {6}<br>
+        <b>Booking Time</b>: {7}<br><br><br>
+        In case of any queries, please reach out to us at info@emotorad.com
+    """.format(booking.name, booking.product.name, booking_dt_local.strftime("%d %B, %Y  %I:%M%p"),
+               booking.dealer.name, booking.dealer.address,
+               "https://www.google.com/maps/search/?api=1&query={0},{1}".format(booking.dealer.latitude, booking.dealer.longitude),
+               booking_dt_local.strftime("%d %B, %Y"), booking_dt_local.strftime("%I:%M%p"))
+    return template
+
+
+def get_booking_confirmation_template_dealer(booking):
+    booking_dt_local = datetime.datetime.combine(booking.preferred_date, booking.preferred_time)
+    template = """
+        Hi {0}<br><br>
+        You have a test ride booking for {1} at {2} is confirmed. Here are the booking details:<br><br>
+        <b>Customer Name</b>: {3}<br>
+        <b>Customer Mobile</b>: {4}<br>
+        <b>Customer Email</b>: {5}<br>
+        <b>Booking Date</b>: {6}<br>
+        <b>Booking Time</b>: {7}<br><br><br>
+        In case of any queries, please reach out to us at info@emotorad.com
+    """.format(booking.dealer.name, booking.product.name, booking_dt_local.strftime("%d %B, %Y  %I:%M%p"),
+               booking.name, booking.phone_number, booking.email,
+               booking_dt_local.strftime("%d %B, %Y"), booking_dt_local.strftime("%I:%M%p"))
     return template
 
 
 def booking_reminder_template(booking):
+    booking_dt_local = datetime.datetime.combine(booking.preferred_date, booking.preferred_time)
     template = """
-        <b>Booking Date</b>: {0}<br>
-        <b>Booking Time</b>: {1}<br>
-        <b>Dealer Name</b>: {2}<br>
-        <b>Dealer Address</b>: {3}<br>
-        <b>Dealer City</b>: {4}<br>
-        <b>Product Name</b>: {5}<br>
-    """.format(booking.preferred_date, booking.preferred_time,
-               booking.dealer.name, booking.dealer.address, booking.dealer.city, booking.product.name)
+        Hi {0}<br><br>
+        Thanks for choosing Emotorad.<br><br>
+        This is a reminder email in reference to your booking for {1} at {2} is confirmed. Here are the booking details:<br><br>
+        <b>Store Name</b>: {3}<br>
+        <b>Store Address</b>: {4}<br>
+        <b>Store Location</b>: {5}<br>
+        <b>Booking Date</b>: {6}<br>
+        <b>Booking Time</b>: {7}<br><br><br>
+        In case of any queries, please reach out to us at info@emotorad.com
+    """.format(booking.name, booking.product.name, booking_dt_local.strftime("%d %B, %Y  %I:%M%p"),
+               booking.dealer.name, booking.dealer.address,
+               "https://www.google.com/maps/search/?api=1&query={0},{1}".format(booking.dealer.latitude, booking.dealer.longitude),
+               booking_dt_local.strftime("%d %B, %Y"), booking_dt_local.strftime("%I:%M%p"))
     return template

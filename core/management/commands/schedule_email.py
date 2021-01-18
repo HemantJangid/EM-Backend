@@ -20,7 +20,8 @@ class Command(BaseCommand):
 
             reminder_template = booking_reminder_template(booking)
             send_at_timestamp = calendar.timegm(send_at.timetuple())
-            send_mail(booking.email, "Reminder", reminder_template, send_at=send_at_timestamp)
+            send_mail(booking.email, "Reminder: You have a test ride booking for " + booking.product.name,
+                      reminder_template, send_at=send_at_timestamp)
 
             booking.is_scheduled = True
             booking.scheduled_at = datetime.datetime.utcnow()
