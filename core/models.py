@@ -60,6 +60,7 @@ CITY_CHOICES = (
     ('Coorg', 'Coorg'),
     ('Corbett National Park', 'Corbett National Park'),
     ('Cotigao Wild Life Sanctuary', 'Cotigao Wild Life Sanctuary'),
+    ('Cuddalore', 'Cuddalore'),
     ('Cuttack', 'Cuttack'),
     ('Dadra and Nagar Haveli', 'Dadra and Nagar Haveli'),
     ('Dalhousie', 'Dalhousie'),
@@ -82,6 +83,7 @@ CITY_CHOICES = (
     ('Gangtok', 'Gangtok'),
     ('Gir Wildlife Sanctuary', 'Gir Wildlife Sanctuary'),
     ('Goa', 'Goa'),
+    ('Gobichettipalayam', 'Gobichettipalayam'),
     ('Great Himalayan National Park', 'Great Himalayan National Park'),
     ('Gulmarg', 'Gulmarg'),
     ('Gurgaon', 'Gurgaon'),
@@ -109,6 +111,7 @@ CITY_CHOICES = (
     ('Kanpur', 'Kanpur'),
     ('Kanyakumari', 'Kanyakumari'),
     ('Kargil', 'Kargil'),
+    ('Karunagappally', 'Karunagappally'),
     ('Karwar', 'Karwar'),
     ('Kausani', 'Kausani'),
     ('Kedarnath', 'Kedarnath'),
@@ -287,6 +290,7 @@ class ProductContent(models.Model):
     info_4_bg_image_2 = models.CharField(max_length=255, null=True, blank=True, default='')
     whats_more_bg_image = models.CharField(max_length=255, null=True, blank=True, default='')
     stats_bg_image = models.CharField(max_length=255, null=True, blank=True, default='')
+    specification_bg = models.CharField(max_length=255, null=True, blank=True, default='')
     whats_more_subtitle_text = models.TextField(null=True, blank=True)
     features_page_main_stat = models.JSONField(default=get_default_json, blank=True)
 
