@@ -121,7 +121,7 @@ if SERVER == "development":
             'NAME': 'dev',
             'USER': 'dev',
             'PASSWORD': 'admin@dev',
-            'HOST': 'emotorad.chvomu8aainz.ap-south-1.rds.amazonaws.com',
+            'HOST': 'emotorad.cgdjzs3zys7r.ap-south-1.rds.amazonaws.com',
             'PORT': '5432',
         }
     }

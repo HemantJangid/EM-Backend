@@ -23,7 +23,8 @@ class ProductContentDto(serializers.ModelSerializer):
                   'features_page_metrics_1', 'info_page_content_2', 'pricing_page_amount', 'pricing_page_emi',
                   'features_page_heading_2', 'landing_page_image', 'features_page_metrics_2', 'primary_color',
                   'info_page_bg_image_url', 'info_4_bg_image_1', 'info_4_bg_image_2', 'whats_more_bg_image',
-                  'features_page_main_stat', 'stats_bg_image', 'whats_more_subtitle_text', 'specification_bg')
+                  'features_page_main_stat', 'stats_bg_image', 'whats_more_subtitle_text', 'specification_bg',
+                  'home_slider_bg_url', 'home_slider_title')
 
 
 class CartDto(serializers.ModelSerializer):

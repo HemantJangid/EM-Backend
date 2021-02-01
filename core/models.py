@@ -291,6 +291,8 @@ class ProductContent(models.Model):
     whats_more_bg_image = models.CharField(max_length=255, null=True, blank=True, default='')
     stats_bg_image = models.CharField(max_length=255, null=True, blank=True, default='')
     specification_bg = models.CharField(max_length=255, null=True, blank=True, default='')
+    home_slider_bg_url = models.CharField(max_length=255, null=True, blank=True, default='')
+    home_slider_title = models.CharField(max_length=255, null=True, blank=True, default='')
     whats_more_subtitle_text = models.TextField(null=True, blank=True)
     features_page_main_stat = models.JSONField(default=get_default_json, blank=True)
 
