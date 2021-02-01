@@ -6,6 +6,7 @@ from django.utils.html import format_html
 from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty, Lead, EmailLeadLogs, Dealer, \
                     TestRideBooking
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
+from csvexport.actions import csvexport
 
 
 @admin.register(Product)
@@ -20,6 +21,8 @@ class ProductAdmin(admin.ModelAdmin):
 @admin.register(EmailLeadLogs)
 class EmailLeadLogsAdmin(admin.ModelAdmin):
     search_fields = ['email', 'subject', 'form_name', 'name', 'address', 'phone', 'product_id', 'cycle_id', 'product_name']
+    list_display = ('email', 'name', 'address', 'phone', 'form_name')
+    actions = [csvexport]
 
     def has_change_permission(self, request, obj=None):
         return False
@@ -35,6 +38,7 @@ class EmailLeadLogsAdmin(admin.ModelAdmin):
 class TestRideBookingAdmin(admin.ModelAdmin):
     search_fields = ['name', 'email', 'city', 'phone_number', 'preferred_date', 'dealer__name']
     list_display = ('name', 'phone_number', 'preferred_date', 'preferred_time', 'dealer')
+    actions = [csvexport]
 
     def has_change_permission(self, request, obj=None):
         return False

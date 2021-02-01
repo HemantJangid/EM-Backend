@@ -55,7 +55,8 @@ INSTALLED_APPS = [
     'storages',
     'user',
     'django_better_admin_arrayfield',
-    'corsheaders'
+    'corsheaders',
+    'csvexport'
 ]
 
 MIDDLEWARE = [
