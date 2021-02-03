@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty, Lead, EmailLeadLogs, Dealer, \
-                    TestRideBooking
+                    TestRideBooking, ProductInfo
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 from csvexport.actions import csvexport
 
@@ -51,11 +51,19 @@ class TestRideBookingAdmin(admin.ModelAdmin):
 
 
 @admin.register(ProductContent)
-class ProducContentAdmin(admin.ModelAdmin, DynamicArrayMixin):
+class ProductContentAdmin(admin.ModelAdmin, DynamicArrayMixin):
 
     def save_model(self, request, obj, form, change):
         call_webhook()
-        return super(ProducContentAdmin, self).save_model(request, obj, form, change)
+        return super(ProductContentAdmin, self).save_model(request, obj, form, change)
+
+
+@admin.register(ProductInfo)
+class ProductInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
+
+    def save_model(self, request, obj, form, change):
+        call_webhook()
+        return super(ProductInfoAdmin, self).save_model(request, obj, form, change)
 
 
 @admin.register(Order)

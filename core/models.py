@@ -306,6 +306,20 @@ class ProductContent(models.Model):
         return str(self.product.name)
 
 
+class ProductInfo(models.Model):
+    product = models.OneToOneField(Product, on_delete=models.CASCADE)
+    brand = models.CharField(max_length=255)
+    category = ArrayField(models.CharField(max_length=255), default=get_default_list, blank=True)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'product_info'
+
+    def __str__(self):
+        return str(self.product.name)
+
+
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
