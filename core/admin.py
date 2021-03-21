@@ -3,8 +3,8 @@ from emotorad.settings import WEBHOOK
 from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
-from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty, Lead, EmailLeadLogs, Dealer, \
-                    TestRideBooking, ProductInfo
+from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty, Lead, Partner, EmailLeadLogs, Dealer, \
+    TestRideBooking, ProductInfo
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 from csvexport.actions import csvexport
 
@@ -20,7 +20,8 @@ class ProductAdmin(admin.ModelAdmin):
 
 @admin.register(EmailLeadLogs)
 class EmailLeadLogsAdmin(admin.ModelAdmin):
-    search_fields = ['email', 'subject', 'form_name', 'name', 'address', 'phone', 'product_id', 'cycle_id', 'product_name']
+    search_fields = ['email', 'subject', 'form_name', 'name',
+                     'address', 'phone', 'product_id', 'cycle_id', 'product_name']
     list_display = ('email', 'name', 'address', 'phone', 'form_name')
     actions = [csvexport]
 
@@ -36,8 +37,10 @@ class EmailLeadLogsAdmin(admin.ModelAdmin):
 
 @admin.register(TestRideBooking)
 class TestRideBookingAdmin(admin.ModelAdmin):
-    search_fields = ['name', 'email', 'city', 'phone_number', 'preferred_date', 'dealer__name']
-    list_display = ('name', 'phone_number', 'preferred_date', 'preferred_time', 'dealer')
+    search_fields = ['name', 'email', 'city',
+                     'phone_number', 'preferred_date', 'dealer__name']
+    list_display = ('name', 'phone_number', 'preferred_date',
+                    'preferred_time', 'dealer')
     actions = [csvexport]
 
     def has_change_permission(self, request, obj=None):
@@ -123,8 +126,25 @@ class WarrantyAdmin(admin.ModelAdmin):
 
 @admin.register(Lead)
 class LeadAdmin(admin.ModelAdmin):
-    search_fields = ['form_name']
-    list_display = ('name', 'phone', 'email', 'form_name')
+    search_fields = ['first_name']
+    list_display = ('first_name', 'last_name', 'phone',
+                    'email', 'address', 'query')
+
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+
+
+@admin.register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
+    search_fields = ['name']
+    list_display = ('name', 'organisation_name', 'address',
+                    'email', 'phone', 'interested_in')
 
     def has_change_permission(self, request, obj=None):
         return False
@@ -150,7 +170,7 @@ def call_webhook():
     url = WEBHOOK
     payload = "{}"
     headers = {
-      'Content-Type': 'application/json'
+        'Content-Type': 'application/json'
     }
 
     response = requests.request("POST", url, headers=headers, data=payload)

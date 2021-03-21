@@ -7,7 +7,9 @@ from user.serializer.dao import LeadDao
 class LeadView(APIView):
 
     def post(self, request):
+        print(request)
         attributes = LeadDao(data=request.data)
+        print("attributes: ", attributes)
         if not attributes.is_valid():
             return bad_request(attributes.errors)
 

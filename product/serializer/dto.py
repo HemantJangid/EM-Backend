@@ -5,7 +5,8 @@ from core.models import Product, ProductContent, Cart, Order, OrderItem, UserAdd
 class DealerDto(serializers.ModelSerializer):
     class Meta:
         model = Dealer
-        fields = ('name', 'phone_number', 'address', 'latitude', 'longitude', 'id', 'city')
+        fields = ('name', 'phone_number', 'address',
+                  'latitude', 'longitude', 'id', 'city')
 
 
 class ProductInfoDto(serializers.ModelSerializer):
@@ -18,7 +19,7 @@ class ProductDto(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('uuid', 'name', 'is_out_of_stock', 'selling_price', 'model_number', 'image_url', 'slug', 'title',
+        fields = ('uuid', 'name', 'is_out_of_stock', 'selling_price', 'emi_per_month', 'model_number', 'image_url', 'slug', 'title',
                   'bg_image')
 
 
@@ -63,7 +64,8 @@ class OrderDto(serializers.ModelSerializer):
 
     class Meta:
         model = Order
-        fields = ('order_items', 'base_amount', 'id', 'total_amount', 'status', 'user_address')
+        fields = ('order_items', 'base_amount', 'id',
+                  'total_amount', 'status', 'user_address')
 
     def get_order_items(self, obj):
         order_items = OrderItem.objects.filter(order=obj).all()

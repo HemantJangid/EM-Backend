@@ -4,8 +4,8 @@ from emotorad.settings import SERVER
 
 
 def get_firebase_user_id(token):
-    if SERVER == 'development':
-        return "1"
+    # if SERVER == 'development':
+    #     return "1"
 
     try:
         result = auth.verify_id_token(token, firebase_client)

@@ -4,7 +4,7 @@ psycopg2==2.8.6
 boto3==1.16.9
 django-storages==1.10.1
 gunicorn==19.9.0
-gevent==20.9.0
+# gevent==20.9.0
 django-better-admin-arrayfield==1.4.0
 firebase-admin==4.3.0
 razorpay==1.2.0

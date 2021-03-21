@@ -14,7 +14,8 @@ class CartView(APIView):
         if not attributes.is_valid():
             return bad_request(attributes.errors)
 
-        product = Product.objects.filter(uuid=product_id, is_archived=False).first()
+        product = Product.objects.filter(
+            uuid=product_id, is_archived=False).first()
         if not product:
             return success({}, "invalid product id", False)
 
@@ -30,7 +31,8 @@ class CartView(APIView):
 
     @auth_required()
     def delete(self, request, product_id):
-        product = Product.objects.filter(uuid=product_id, is_archived=False).first()
+        product = Product.objects.filter(
+            uuid=product_id, is_archived=False).first()
         if not product:
             return success({}, "invalid product id", False)
 

@@ -233,7 +233,8 @@ class User(models.Model):
     id = models.CharField(max_length=255, primary_key=True)
     name = models.CharField(max_length=255, null=True, blank=True, default='')
     email = models.CharField(max_length=255, null=True, blank=True, default='')
-    phone_number = models.CharField(max_length=255, null=True, blank=True, default='')
+    phone_number = models.CharField(
+        max_length=255, null=True, blank=True, default='')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -250,11 +251,15 @@ class Product(models.Model):
     type = models.CharField(max_length=255, null=False, blank=False, default='ACCESSORY',
                             choices=[(PRODUCT_ACCESSORY, PRODUCT_ACCESSORY), (PRODUCT_VEHICLE, PRODUCT_VEHICLE)])
     maximum_retail_price = models.IntegerField(default=0)
+    emi_per_month = models.IntegerField(default=0)
     selling_price = models.IntegerField(default=0)
-    model_number = models.CharField(max_length=255, null=True, blank=True, default='')
+    model_number = models.CharField(
+        max_length=255, null=True, blank=True, default='')
     slug = models.CharField(max_length=255, default="", unique=True)
-    image_url = models.CharField(max_length=255, null=True, blank=True, default='')
-    bg_image = models.CharField(max_length=255, null=True, blank=True, default='')
+    image_url = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    bg_image = models.CharField(
+        max_length=255, null=True, blank=True, default='')
     title = models.CharField(max_length=255, null=True, blank=True, default='')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -271,32 +276,48 @@ class Product(models.Model):
 class ProductContent(models.Model):
     product = models.OneToOneField(Product, on_delete=models.CASCADE)
     landing_page_content = models.TextField(null=True, blank=True)
-    landing_page_image = models.CharField(max_length=255, null=True, blank=True, default='')
+    landing_page_image = models.CharField(
+        max_length=255, null=True, blank=True, default='')
     info_page_content_1 = models.TextField(null=True, blank=True)
     info_page_content_2 = models.TextField(null=True, blank=True)
-    video_page_video_link = models.CharField(max_length=255, null=True, blank=True, default='')
+    video_page_video_link = models.CharField(
+        max_length=255, null=True, blank=True, default='')
     stats_page_heading = models.TextField(null=True, blank=True)
     stats_page_content = models.TextField(null=True, blank=True)
     stats_page_metrics = models.JSONField(default=get_default_json, blank=True)
     features_page_heading_1 = models.TextField(null=True, blank=True)
     features_page_heading_2 = models.TextField(null=True, blank=True)
     features_page_content_1 = models.TextField(null=True, blank=True)
-    features_page_metrics_1 = ArrayField(models.CharField(max_length=255), default=get_default_list, blank=True)
-    features_page_metrics_2 = ArrayField(models.CharField(max_length=255), default=get_default_list, blank=True)
-    pricing_page_amount = models.CharField(max_length=255, null=True, blank=True, default='0')
-    pricing_page_emi = models.CharField(max_length=255, null=True, blank=True, default='0')
+    features_page_metrics_1 = ArrayField(models.CharField(
+        max_length=255), default=get_default_list, blank=True)
+    features_page_metrics_2 = ArrayField(models.CharField(
+        max_length=255), default=get_default_list, blank=True)
+    pricing_page_amount = models.CharField(
+        max_length=255, null=True, blank=True, default='0')
+    pricing_page_emi = models.CharField(
+        max_length=255, null=True, blank=True, default='0')
 
-    primary_color = models.CharField(max_length=255, null=True, blank=True, default='')
-    info_page_bg_image_url = models.CharField(max_length=255, null=True, blank=True, default='')
-    info_4_bg_image_1 = models.CharField(max_length=255, null=True, blank=True, default='')
-    info_4_bg_image_2 = models.CharField(max_length=255, null=True, blank=True, default='')
-    whats_more_bg_image = models.CharField(max_length=255, null=True, blank=True, default='')
-    stats_bg_image = models.CharField(max_length=255, null=True, blank=True, default='')
-    specification_bg = models.CharField(max_length=255, null=True, blank=True, default='')
-    home_slider_bg_url = models.CharField(max_length=255, null=True, blank=True, default='')
-    home_slider_title = models.CharField(max_length=255, null=True, blank=True, default='')
+    primary_color = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    info_page_bg_image_url = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    info_4_bg_image_1 = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    info_4_bg_image_2 = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    whats_more_bg_image = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    stats_bg_image = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    specification_bg = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    home_slider_bg_url = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    home_slider_title = models.CharField(
+        max_length=255, null=True, blank=True, default='')
     whats_more_subtitle_text = models.TextField(null=True, blank=True)
-    features_page_main_stat = models.JSONField(default=get_default_json, blank=True)
+    features_page_main_stat = models.JSONField(
+        default=get_default_json, blank=True)
 
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -311,7 +332,8 @@ class ProductContent(models.Model):
 class ProductInfo(models.Model):
     product = models.OneToOneField(Product, on_delete=models.CASCADE)
     brand = models.CharField(max_length=255)
-    category = ArrayField(models.CharField(max_length=255), default=get_default_list, blank=True)
+    category = ArrayField(models.CharField(max_length=255),
+                          default=get_default_list, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -336,12 +358,18 @@ class Cart(models.Model):
 class UserAddress(models.Model):
     uuid = models.UUIDField(default=uuid.uuid4, unique=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE)
-    full_name = models.CharField(max_length=255, null=True, blank=True, default='')
-    phone_number = models.CharField(max_length=255, null=True, blank=True, default='')
-    pincode = models.CharField(max_length=255, null=True, blank=True, default='')
-    address_line_1 = models.CharField(max_length=255, null=True, blank=True, default='')
-    address_line_2 = models.CharField(max_length=255, null=True, blank=True, default='')
-    landmark = models.CharField(max_length=255, null=True, blank=True, default='')
+    full_name = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    phone_number = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    pincode = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    address_line_1 = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    address_line_2 = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    landmark = models.CharField(
+        max_length=255, null=True, blank=True, default='')
     city = models.CharField(max_length=255, null=True, blank=True, default='')
     state = models.CharField(max_length=255, null=True, blank=True, default='')
     is_deleted = models.BooleanField(default=False)
@@ -370,7 +398,8 @@ class Order(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.id = ''.join(random.choices(string.ascii_uppercase + string.digits, k=6))
+            self.id = ''.join(random.choices(
+                string.ascii_uppercase + string.digits, k=6))
         super(Order, self).save(*args, **kwargs)
 
     class Meta:
@@ -409,7 +438,8 @@ class Transaction(models.Model):
 
 
 class Warranty(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, blank=True, null=True)
     frame_number = models.CharField(max_length=255, unique=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -422,11 +452,15 @@ class Warranty(models.Model):
 
 
 class Lead(models.Model):
-    name = models.CharField(max_length=255, null=True, blank=True, default='')
+    first_name = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    last_name = models.CharField(
+        max_length=255, null=True, blank=True, default='')
     phone = models.CharField(max_length=255, null=True, blank=True, default='')
     email = models.CharField(max_length=255, null=True, blank=True, default='')
-    city = models.CharField(max_length=255, null=True, blank=True, default='')
-    form_name = models.CharField(max_length=255, null=True, blank=True, default='')
+    address = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    query = models.TextField(null=True, blank=True)
     meta = models.TextField(null=True, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -438,8 +472,30 @@ class Lead(models.Model):
         return str(self.name)
 
 
+class Partner(models.Model):
+    name = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    organisation_name = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    phone = models.CharField(max_length=255, null=True, blank=True, default='')
+    email = models.CharField(max_length=255, null=True, blank=True, default='')
+    address = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    interested_in = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'partner'
+
+    def __str__(self):
+        return str(self.name)
+
+
 class InsuranceRequest(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE, blank=True, null=True)
+    user = models.ForeignKey(
+        User, on_delete=models.CASCADE, blank=True, null=True)
     frame_number = models.CharField(max_length=255, unique=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -480,7 +536,8 @@ class EmailLeadLogs(models.Model):
 class Dealer(models.Model):
     name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=255)
-    city = models.CharField(max_length=255, default=None, null=True, choices=CITY_CHOICES)
+    city = models.CharField(max_length=255, default=None,
+                            null=True, choices=CITY_CHOICES)
     email = models.CharField(max_length=255, default=None, null=True)
     latitude = models.FloatField()
     longitude = models.FloatField()
@@ -497,11 +554,12 @@ class Dealer(models.Model):
 
 
 class TestRideBooking(models.Model):
-    product = models.ForeignKey(Product, on_delete=models.CASCADE, default=None, null=True)
     name = models.CharField(max_length=255)
+    organisation_name = models.CharField(max_length=255)
     phone_number = models.CharField(max_length=255)
     email = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
+    bike_name = models.CharField(max_length=255)
     dealer = models.ForeignKey(Dealer, on_delete=models.CASCADE)
     preferred_date = models.DateField()
     preferred_time = models.TimeField()

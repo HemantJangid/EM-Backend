@@ -10,8 +10,10 @@ class AddAddressDao(serializers.Serializer):
     phone_number = serializers.CharField(max_length=14)
     pincode = serializers.CharField(max_length=10)
     address_line_1 = serializers.CharField(max_length=255)
-    address_line_2 = serializers.CharField(max_length=255, required=False, allow_blank=True)
-    landmark = serializers.CharField(max_length=255, required=False, default='', allow_blank=True)
+    address_line_2 = serializers.CharField(
+        max_length=255, required=False, allow_blank=True)
+    landmark = serializers.CharField(
+        max_length=255, required=False, default='', allow_blank=True)
     city = serializers.CharField(max_length=255)
     state = serializers.CharField(max_length=255)
 
@@ -21,20 +23,34 @@ class DeleteAddressDao(serializers.Serializer):
 
 
 class EmailLeadLogsDao(serializers.Serializer):
-    email = serializers.CharField(max_length=255, required=False, allow_blank=True)
-    form_name = serializers.CharField(max_length=255, required=False, allow_blank=True)
-    name = serializers.CharField(max_length=255, required=False, allow_blank=True)
-    organization_name = serializers.CharField(max_length=255, required=False, allow_blank=True)
-    address = serializers.CharField(max_length=255, required=False, allow_blank=True)
-    country = serializers.CharField(max_length=255, required=False, allow_blank=True)
-    city = serializers.CharField(max_length=255, required=False, allow_blank=True)
-    phone = serializers.CharField(max_length=255, required=False, allow_blank=True)
-    interest = serializers.CharField(max_length=255, required=False, allow_blank=True)
-    remarks = serializers.CharField(max_length=255, required=False, allow_blank=True)
-    cycle_id = serializers.CharField(max_length=255, required=False, allow_blank=True)
-    product_id = serializers.CharField(max_length=255, required=False, allow_blank=True)
-    product_name = serializers.CharField(max_length=255, required=False, allow_blank=True)
-    preferred_date = serializers.CharField(max_length=255, required=False, allow_blank=True)
+    email = serializers.CharField(
+        max_length=255, required=False, allow_blank=True)
+    form_name = serializers.CharField(
+        max_length=255, required=False, allow_blank=True)
+    name = serializers.CharField(
+        max_length=255, required=False, allow_blank=True)
+    organization_name = serializers.CharField(
+        max_length=255, required=False, allow_blank=True)
+    address = serializers.CharField(
+        max_length=255, required=False, allow_blank=True)
+    country = serializers.CharField(
+        max_length=255, required=False, allow_blank=True)
+    city = serializers.CharField(
+        max_length=255, required=False, allow_blank=True)
+    phone = serializers.CharField(
+        max_length=255, required=False, allow_blank=True)
+    interest = serializers.CharField(
+        max_length=255, required=False, allow_blank=True)
+    remarks = serializers.CharField(
+        max_length=255, required=False, allow_blank=True)
+    cycle_id = serializers.CharField(
+        max_length=255, required=False, allow_blank=True)
+    product_id = serializers.CharField(
+        max_length=255, required=False, allow_blank=True)
+    product_name = serializers.CharField(
+        max_length=255, required=False, allow_blank=True)
+    preferred_date = serializers.CharField(
+        max_length=255, required=False, allow_blank=True)
 
 
 class SendEmailDao(serializers.Serializer):
@@ -45,16 +61,31 @@ class SendEmailDao(serializers.Serializer):
 
 
 class LeadDao(serializers.Serializer):
-    name = serializers.CharField()
+    first_name = serializers.CharField()
+    last_name = serializers.CharField()
     phone = serializers.CharField()
     email = serializers.CharField()
-    city = serializers.CharField(max_length=255, required=False, default='', allow_blank=True)
-    form_name = serializers.CharField()
-    meta = serializers.DictField(child=serializers.CharField(), allow_empty=True)
+    address = serializers.CharField(
+        max_length=255, required=False, default='', allow_blank=True)
+    query = serializers.CharField(
+        required=False, default='', allow_blank=True)
+    meta = serializers.DictField(
+        child=serializers.CharField(), allow_empty=True)
+
+
+class PartnerDao(serializers.Serializer):
+    name = serializers.CharField()
+    organisation_name = serializers.CharField()
+    phone = serializers.CharField()
+    email = serializers.CharField()
+    address = serializers.CharField(
+        max_length=255, required=False, default='', allow_blank=True)
+    interested_in = serializers.CharField()
 
 
 class UserProfileDao(serializers.Serializer):
     first_name = serializers.CharField(max_length=255)
-    last_name = serializers.CharField(max_length=255, required=False, default='', allow_blank=True)
+    last_name = serializers.CharField(
+        max_length=255, required=False, default='', allow_blank=True)
     email = serializers.CharField(max_length=255)
     phone_number = serializers.CharField(max_length=14)
