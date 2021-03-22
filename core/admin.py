@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty, Lead, Partner, EmailLeadLogs, Dealer, \
-    TestRideBooking, ProductInfo
+    TestRideBooking, ProductInfo, Blog
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 from csvexport.actions import csvexport
 
@@ -16,6 +16,11 @@ class ProductAdmin(admin.ModelAdmin):
     def save_model(self, request, obj, form, change):
         call_webhook()
         return super(ProductAdmin, self).save_model(request, obj, form, change)
+
+
+@admin.register(Blog)
+class BlogAdmin(admin.ModelAdmin):
+    readonly_fields = ('uuid',)
 
 
 @admin.register(EmailLeadLogs)

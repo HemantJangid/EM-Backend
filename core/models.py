@@ -573,3 +573,17 @@ class TestRideBooking(models.Model):
 
     def __str__(self):
         return str(self.name)
+
+
+class Blog(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True)
+    blog_title = models.CharField(max_length=255, unique=True)
+    blog_image = models.TextField()
+    blog_description = models.TextField()
+    blog_content = models.TextField()
+
+    class Meta:
+        db_table = 'blog'
+
+    def __str__(self):
+        return str(self.blog_title)
