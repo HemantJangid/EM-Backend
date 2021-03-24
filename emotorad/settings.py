@@ -36,9 +36,14 @@ else:
     WEBHOOK = "https://webhook.gatsbyjs.com/hooks/data_source/db743eee-1078-4b82-bf79-39a0a8e43b72"
     DEBUG = True
 
-RAZORPAY_KEY_ID = os.environ['RAZORPAY_KEY_ID']
-RAZORPAY_KEY_SECRET = os.environ['RAZORPAY_KEY_SECRET']
+# RAZORPAY_KEY_ID = os.environ['RAZORPAY_KEY_ID']
+# RAZORPAY_KEY_SECRET = os.environ['RAZORPAY_KEY_SECRET']
+# SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
+
+RAZORPAY_KEY_ID = "rzp_test_t4fMAIqMYPBJ38"
+RAZORPAY_KEY_SECRET = "5wLzhrdMeOb4rDWGksWxzRPD"
 SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
+
 
 # Application definition
 

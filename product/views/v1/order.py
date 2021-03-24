@@ -14,7 +14,8 @@ class OrderView(APIView):
         if not attributes.is_valid():
             return bad_request(attributes.errors)
 
-        user_address = UserAddress.objects.filter(user=request.user, uuid=attributes.data['user_address_uuid']).first()
+        user_address = UserAddress.objects.filter(
+            user=request.user, uuid=attributes.data['user_address_uuid']).first()
         if not user_address:
             return success({}, "invalid user address", False)
 
@@ -26,7 +27,8 @@ class OrderView(APIView):
         for item in cart:
             total_amount += (item.product.selling_price * item.quantity)
 
-        order = Order(total_amount=total_amount, user=request.user, user_address=user_address, base_amount=total_amount)
+        order = Order(total_amount=total_amount*100, user=request.user,
+                      user_address=user_address, base_amount=total_amount*100)
         order.save()
 
         order_items = []
