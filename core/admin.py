@@ -126,7 +126,8 @@ class TransactionAdmin(admin.ModelAdmin):
 
 @admin.register(Warranty)
 class WarrantyAdmin(admin.ModelAdmin):
-    readonly_fields = ('id', 'user')
+    readonly_fields = ('id', 'frame_number', 'user',
+                       'purchase_date', 'dealer_or_online')
 
 
 @admin.register(Lead)

@@ -441,6 +441,8 @@ class Warranty(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, blank=True, null=True)
     frame_number = models.CharField(max_length=255, unique=True)
+    purchase_date = models.DateField()
+    dealer_or_online = models.CharField(max_length=255)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 

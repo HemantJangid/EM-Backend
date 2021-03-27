@@ -13,14 +13,17 @@ class WarrantyView(APIView):
         if not attributes.is_valid():
             return bad_request(attributes.errors)
 
-        warranty = Warranty.objects.filter(frame_number=attributes.data["frame_number"]).first()
-        if not warranty:
-            return success({}, "invalid frame number", False)
+        warranty = Warranty.objects.filter(
+            frame_number=attributes.data["frame_number"]).first()
 
-        if warranty.user_id:
+        if warranty:
             return success({}, "warranty already claimed", False)
 
-        warranty.user = request.user
+        print(attributes.data)
+        warranty = Warranty.objects.create(user=request.user,
+                                           frame_number=attributes.data["frame_number"],
+                                           purchase_date=attributes.data["purchase_date"],
+                                           dealer_or_online=attributes.data["dealer_or_online"])
         warranty.save()
 
         return success({}, "warranty updated successfully", True)

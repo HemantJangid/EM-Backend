@@ -12,10 +12,12 @@ def auth_required():
             auth_token = request.META['HTTP_AUTHORIZATION']
 
             firebase_id = get_firebase_user_id(auth_token)
+            print(firebase_id)
             if not firebase_id:
                 return unauthorized({})
 
             user = User.objects.filter(id=firebase_id).first()
+            print(user)
             if not user:
                 return unauthorized({})
 

@@ -9,6 +9,7 @@ def get_firebase_user_id(token):
 
     try:
         result = auth.verify_id_token(token, firebase_client)
+        # print(result)
     except Exception as e:
         return None
     return result["user_id"]
