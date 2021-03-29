@@ -14,6 +14,7 @@ class TestRideView(APIView):
 
     def post(self, request):
         attributes = TestRideBookingDao(data=request.data)
+        # print(attributes)
         if not attributes.is_valid():
             return bad_request(attributes.errors)
 
@@ -40,7 +41,7 @@ class TestRideView(APIView):
         if email_list:
             message = get_booking_confirmation_template_dealer(booking)
             send_mail(
-                email_list, "Emotorad: Test ride booking confirmed for " + product.name, message)
+                email_list, "Emotorad: Test ride booking confirmed for " + attributes.data["name"], message)
 
         now = datetime.datetime.utcnow() + datetime.timedelta(seconds=19800)
         booking_dt_local = datetime.datetime.combine(

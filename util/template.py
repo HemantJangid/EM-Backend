@@ -47,7 +47,7 @@ def get_booking_confirmation_template_dealer(booking):
         <b>Booking Date</b>: {6}<br>
         <b>Booking Time</b>: {7}<br><br><br>
         In case of any queries, please reach out to us at info@emotorad.com
-    """.format(booking.dealer.name, booking.product.name, booking_dt_local.strftime("%d %B, %Y  %I:%M%p"),
+    """.format(booking.dealer.name, booking.bike_name, booking_dt_local.strftime("%d %B, %Y  %I:%M%p"),
                booking.name, booking.phone_number, booking.email,
                booking_dt_local.strftime("%d %B, %Y"), booking_dt_local.strftime("%I:%M%p"))
     return template
