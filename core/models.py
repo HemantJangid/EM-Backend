@@ -251,6 +251,7 @@ class Product(models.Model):
     type = models.CharField(max_length=255, null=False, blank=False, default='ACCESSORY',
                             choices=[(PRODUCT_ACCESSORY, PRODUCT_ACCESSORY), (PRODUCT_VEHICLE, PRODUCT_VEHICLE)])
     maximum_retail_price = models.IntegerField(default=0)
+    display_position = models.IntegerField()
     emi_per_month = models.IntegerField(default=0)
     selling_price = models.IntegerField(default=0)
     model_number = models.CharField(

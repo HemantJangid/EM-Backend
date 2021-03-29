@@ -19,7 +19,7 @@ class ProductDto(serializers.ModelSerializer):
 
     class Meta:
         model = Product
-        fields = ('uuid', 'name', 'is_out_of_stock', 'selling_price', 'emi_per_month', 'model_number', 'image_url', 'slug', 'title',
+        fields = ('uuid', 'name', 'display_position', 'is_out_of_stock', 'selling_price', 'emi_per_month', 'model_number', 'image_url', 'slug', 'title',
                   'bg_image')
 
 
