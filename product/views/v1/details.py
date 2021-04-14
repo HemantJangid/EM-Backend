@@ -16,6 +16,8 @@ class ProductDetailView(APIView):
         if not product:
             return success({}, "invalid product id", False)
 
+        print("product: ", product)
+
         content = ProductContent.objects.filter(product=product).first()
         if not content:
             return success({}, "no content is present", False)
