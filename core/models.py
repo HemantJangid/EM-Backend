@@ -262,6 +262,9 @@ class Product(models.Model):
     bg_image = models.CharField(
         max_length=255, null=True, blank=True, default='')
     title = models.CharField(max_length=255, null=True, blank=True, default='')
+    colors = ArrayField(models.JSONField(
+        default=get_default_json, blank=True),
+        default=get_default_list, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     is_archived = models.BooleanField(default=False)
@@ -348,6 +351,7 @@ class ProductInfo(models.Model):
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    color = models.CharField(max_length=255)
     quantity = models.IntegerField(default=1)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -413,6 +417,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    color = models.CharField(max_length=255)
     amount = models.IntegerField(default=0)
     quantity = models.IntegerField(default=1)
     created_on = models.DateTimeField(auto_now_add=True)

@@ -10,7 +10,7 @@ from csvexport.actions import csvexport
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(admin.ModelAdmin, DynamicArrayMixin):
     readonly_fields = ('uuid',)
 
     def save_model(self, request, obj, form, change):
