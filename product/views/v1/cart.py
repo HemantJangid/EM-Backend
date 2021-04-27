@@ -23,6 +23,7 @@ class CartView(APIView):
         if not cart:
             cart = Cart(product=product, user=request.user)
             cart.quantity = attributes.data["quantity"]
+            cart.color = attributes.data["color"]
         else:
             cart.quantity += attributes.data["quantity"]
         cart.save()

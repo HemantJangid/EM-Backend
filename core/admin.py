@@ -4,23 +4,40 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty, Lead, Partner, EmailLeadLogs, Dealer, \
-    TestRideBooking, ProductInfo, Blog
+    TestRideBooking, ProductInfo, Blog, Promocode, ProductColors
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 from csvexport.actions import csvexport
+
+
+class ProductColorsAdmin(admin.StackedInline):
+    model = ProductColors
+
 
 
 @admin.register(Product)
 class ProductAdmin(admin.ModelAdmin, DynamicArrayMixin):
     readonly_fields = ('uuid',)
+    inlines = [ProductColorsAdmin]
 
     def save_model(self, request, obj, form, change):
         call_webhook()
         return super(ProductAdmin, self).save_model(request, obj, form, change)
+    
+
+@admin.register(ProductColors)
+class ProductColorsAdmin(admin.ModelAdmin):
+    pass
 
 
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
     readonly_fields = ('uuid',)
+    
+
+@admin.register(Promocode)
+class PromocodeAdmin(admin.ModelAdmin):
+    readonly_fields = ('uuid',)
+    list_display = ('discount_code', 'discount_percent')
 
 
 @admin.register(EmailLeadLogs)
@@ -77,7 +94,8 @@ class ProductInfoAdmin(admin.ModelAdmin, DynamicArrayMixin):
 @admin.register(Order)
 class OrderAdmin(admin.ModelAdmin):
     search_fields = ['status', 'id']
-    list_display = ('id', 'status')
+    list_display = ('id', 'status',)
+    # 'base_amount', 'discount_amount', 'total_amount'
 
     def has_change_permission(self, request, obj=None):
         return False

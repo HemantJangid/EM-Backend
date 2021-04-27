@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from core.models import Product, ProductContent, Cart, Order, OrderItem, UserAddress, Dealer, ProductInfo
+from core.models import Product, ProductContent, Cart, Order, OrderItem, UserAddress, Dealer, ProductInfo, Promocode, ProductColors
 
 
 class DealerDto(serializers.ModelSerializer):
@@ -13,14 +13,26 @@ class ProductInfoDto(serializers.ModelSerializer):
     class Meta:
         model = ProductInfo
         fields = ('brand', 'category')
+        
+        
+class ProductColorsDto(serializers.ModelSerializer):
+
+    class Meta:
+        model = ProductColors
+        fields = ('name', 'image')
 
 
 class ProductDto(serializers.ModelSerializer):
+    product_colors = serializers.SerializerMethodField()
 
     class Meta:
         model = Product
         fields = ('uuid', 'name', 'display_position', 'is_out_of_stock', 'selling_price', 'emi_per_month', 'model_number', 'image_url', 'slug', 'title',
-                  'bg_image', 'colors')
+                  'bg_image', 'product_colors')
+        
+    def get_product_colors(self, obj):
+        product_colors = ProductColors.objects.filter(product=obj).all()
+        return ProductColorsDto(product_colors, many=True).data
 
 
 class ProductContentDto(serializers.ModelSerializer):
@@ -71,3 +83,10 @@ class OrderDto(serializers.ModelSerializer):
     def get_order_items(self, obj):
         order_items = OrderItem.objects.filter(order=obj).all()
         return OrderItemDto(order_items, many=True).data
+
+
+class PromocodeDto(serializers.ModelSerializer):
+
+    class Meta:
+        model = Promocode
+        fields = ('uuid', 'discount_code', 'discount_percent')

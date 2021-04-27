@@ -3,6 +3,7 @@ import random
 import string
 from django.db import models
 from django_better_admin_arrayfield.models.fields import ArrayField
+from django.core.validators import MaxValueValidator
 
 PRODUCT_VEHICLE = 'VEHICLE'
 PRODUCT_ACCESSORY = 'ACCESSORY'
@@ -262,9 +263,6 @@ class Product(models.Model):
     bg_image = models.CharField(
         max_length=255, null=True, blank=True, default='')
     title = models.CharField(max_length=255, null=True, blank=True, default='')
-    colors = ArrayField(models.JSONField(
-        default=get_default_json, blank=True),
-        default=get_default_list, blank=True)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     is_archived = models.BooleanField(default=False)
@@ -272,6 +270,24 @@ class Product(models.Model):
 
     class Meta:
         db_table = 'product'
+
+    def __str__(self):
+        return str(self.name)
+    
+    
+class ProductColors(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, unique=True)
+    image = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'productColors'
+        verbose_name = "Product Color"
+        verbose_name_plural = "Product Colors"
 
     def __str__(self):
         return str(self.name)
@@ -595,3 +611,16 @@ class Blog(models.Model):
 
     def __str__(self):
         return str(self.blog_title)
+    
+    
+class Promocode(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True)
+    discount_code = models.CharField(max_length=255, unique=True)
+    discount_percent = models.IntegerField(validators=[MaxValueValidator(100)])
+
+
+    class Meta:
+        db_table = 'promocode'
+
+    def __str__(self):
+        return str(self.discount_code)
