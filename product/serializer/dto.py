@@ -19,7 +19,7 @@ class ProductColorsDto(serializers.ModelSerializer):
 
     class Meta:
         model = ProductColors
-        fields = ('name', 'image')
+        fields = ('name', 'image', 'uuid')
 
 
 class ProductDto(serializers.ModelSerializer):
@@ -36,6 +36,9 @@ class ProductDto(serializers.ModelSerializer):
 
 
 class ProductContentDto(serializers.ModelSerializer):
+    
+    product = ProductDto()
+    
     class Meta:
         model = ProductContent
         fields = ('landing_page_content', 'info_page_content_1', 'video_page_video_link', 'stats_page_heading',
@@ -53,7 +56,7 @@ class CartDto(serializers.ModelSerializer):
 
     class Meta:
         model = Cart
-        fields = ('quantity', 'product')
+        fields = ('quantity', 'product', 'color')
 
 
 class OrderItemDto(serializers.ModelSerializer):
