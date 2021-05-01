@@ -64,7 +64,7 @@ class OrderItemDto(serializers.ModelSerializer):
 
     class Meta:
         model = OrderItem
-        fields = ('quantity', 'product', 'amount')
+        fields = ('quantity', 'product', 'amount', 'color')
 
 
 class UserAddressDto(serializers.ModelSerializer):
