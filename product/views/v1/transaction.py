@@ -17,7 +17,8 @@ class PayOrderRazorapyView(APIView):
         attributes = PayOrdeRazorpayDao(data=request.data)
         if not attributes.is_valid():
             return bad_request(attributes.errors)
-
+        
+        print(attributes.data)
         razorpay_id = attributes.data["razorpay_id"]
         order = Order.objects.filter(user=request.user, id=attributes.data["order_id"]).first()
         if not order:
@@ -32,6 +33,7 @@ class PayOrderRazorapyView(APIView):
         try:
             client.payment.capture(razorpay_id, order.total_amount)
         except Exception as e:
+            print(e)
             order.status = ORDER_CANCELLED
             order.save()
             return success({}, str(e), False)

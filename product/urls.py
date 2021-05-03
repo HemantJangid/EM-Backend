@@ -9,6 +9,7 @@ from .views.v1.insurance import InsuranceView
 from .views.v1.dealer import DealerView
 from .views.v1.test_ride import TestRideView
 from .views.v1.accessory import ProductAccessoryListView
+from .views.v1.promocode import ApplyPromocodeView
 
 
 urlpatterns = [
@@ -24,4 +25,5 @@ urlpatterns = [
     url(r'^v1/insurance$', InsuranceView.as_view()),
     url(r'^v1/dealer/list$', DealerView.as_view()),
     url(r'^v1/test-ride$', TestRideView.as_view()),
+    url(r'^v1/apply-promocode$', ApplyPromocodeView.as_view()),
 ]

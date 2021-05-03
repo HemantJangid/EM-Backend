@@ -3,6 +3,7 @@ import random
 import string
 from django.db import models
 from django_better_admin_arrayfield.models.fields import ArrayField
+from django.core.validators import MaxValueValidator
 
 PRODUCT_VEHICLE = 'VEHICLE'
 PRODUCT_ACCESSORY = 'ACCESSORY'
@@ -276,6 +277,24 @@ class Product(models.Model):
 
     def __str__(self):
         return str(self.name)
+    
+    
+class ProductColors(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True)
+    product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    name = models.CharField(max_length=255, unique=True)
+    image = models.CharField(
+        max_length=255, null=True, blank=True, default='')
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+
+    class Meta:
+        db_table = 'productColors'
+        verbose_name = "Product Color"
+        verbose_name_plural = "Product Colors"
+
+    def __str__(self):
+        return str(self.name)
 
 
 class ProductContent(models.Model):
@@ -352,6 +371,7 @@ class ProductInfo(models.Model):
 class Cart(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    color = models.CharField(max_length=255)
     quantity = models.IntegerField(default=1)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
@@ -417,6 +437,7 @@ class Order(models.Model):
 class OrderItem(models.Model):
     order = models.ForeignKey(Order, on_delete=models.CASCADE)
     product = models.ForeignKey(Product, on_delete=models.CASCADE)
+    color = models.CharField(max_length=255)
     amount = models.IntegerField(default=0)
     quantity = models.IntegerField(default=1)
     created_on = models.DateTimeField(auto_now_add=True)
@@ -594,3 +615,16 @@ class Blog(models.Model):
 
     def __str__(self):
         return str(self.blog_title)
+    
+    
+class Promocode(models.Model):
+    uuid = models.UUIDField(default=uuid.uuid4, unique=True)
+    discount_code = models.CharField(max_length=255, unique=True)
+    discount_percent = models.IntegerField(validators=[MaxValueValidator(100)])
+
+
+    class Meta:
+        db_table = 'promocode'
+
+    def __str__(self):
+        return str(self.discount_code)

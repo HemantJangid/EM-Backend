@@ -1,5 +1,5 @@
 from rest_framework.views import APIView
-from core.models import OrderItem, Cart, Order, UserAddress
+from core.models import OrderItem, Cart, Order, UserAddress, Promocode
 from middleware.response import success, bad_request
 from middleware.request import auth_required
 from product.serializer.dao import OrderDao
@@ -22,14 +22,28 @@ class OrderView(APIView):
         cart = Cart.objects.filter(user=request.user).all()
         if not cart:
             return success({}, "cannot create empty order", False)
-
-        total_amount = 0
-        for item in cart:
-            total_amount += (item.product.selling_price * item.quantity)
-
-        order = Order(total_amount=total_amount*100, user=request.user,
-                      user_address=user_address, base_amount=total_amount*100)
-        order.save()
+        
+        if attributes.data['discount_code'] != "NO-PROMO-CODE":
+            promocode = Promocode.objects.filter(discount_code=attributes.data['discount_code']).first()
+            if not promocode:
+                return success({}, "invalid promocode", False)
+            
+            total_amount = 0
+            for item in cart:
+                total_amount += (item.product.selling_price * item.quantity)
+    
+            order = Order(total_amount=total_amount*(100-promocode.discount_percent), user=request.user,
+                          user_address=user_address, base_amount=total_amount*100, discount_amount=total_amount*promocode.discount_percent)
+            order.save()
+            
+        else: 
+            total_amount = 0
+            for item in cart:
+                total_amount += (item.product.selling_price * item.quantity)
+    
+            order = Order(total_amount=total_amount*100, user=request.user,
+                          user_address=user_address, base_amount=total_amount*100)
+            order.save()
 
         order_items = []
         for item in cart:
@@ -37,7 +51,7 @@ class OrderView(APIView):
             order_items.append(OrderItem(order=order,
                                          product=product,
                                          amount=product.selling_price,
-                                         quantity=item.quantity))
+                                         quantity=item.quantity, color=item.color))
         OrderItem.objects.bulk_create(order_items)
 
         for item in cart:

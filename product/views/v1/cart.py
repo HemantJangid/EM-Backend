@@ -23,8 +23,10 @@ class CartView(APIView):
         if not cart:
             cart = Cart(product=product, user=request.user)
             cart.quantity = attributes.data["quantity"]
+            cart.color = attributes.data["color"]
         else:
-            cart.quantity += attributes.data["quantity"]
+            cart.quantity = attributes.data["quantity"]
+            cart.color = attributes.data["color"]
         cart.save()
 
         return success({}, "product added successfully", True)
@@ -54,4 +56,4 @@ class GetCartView(APIView):
     @auth_required()
     def get(self, request):
         carts = Cart.objects.filter(user=request.user).all()
-        return success({"products": CartDto(carts, many=True).data}, "product removed successfully", True)
+        return success({"products": CartDto(carts, many=True).data}, "cart fetched successfully", True)

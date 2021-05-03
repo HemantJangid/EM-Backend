@@ -40,14 +40,17 @@ RAZORPAY_KEY_ID = os.environ['RAZORPAY_KEY_ID']
 RAZORPAY_KEY_SECRET = os.environ['RAZORPAY_KEY_SECRET']
 SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
 
-# RAZORPAY_KEY_ID = "rzp_test_t4fMAIqMYPBJ38"
-# RAZORPAY_KEY_SECRET = "5wLzhrdMeOb4rDWGksWxzRPD"
+# RAZORPAY_KEY_ID = "rzp_test_eitK7NxhWmXGHL"
+# RAZORPAY_KEY_SECRET = "q0Xrj4f7IKrgu0cnzEH2SOVL"
 # SENDGRID_API_KEY = os.environ["SENDGRID_API_KEY"]
 
 
 # Application definition
 
 INSTALLED_APPS = [
+    'admin_interface',
+    'colorfield',
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -61,8 +64,10 @@ INSTALLED_APPS = [
     'user',
     'django_better_admin_arrayfield',
     'corsheaders',
-    'csvexport'
+    'csvexport',
 ]
+
+X_FRAME_OPTIONS='SAMEORIGIN'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -170,7 +175,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
 

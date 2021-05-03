@@ -3,6 +3,7 @@ from rest_framework import serializers
 
 class OrderDao(serializers.Serializer):
     user_address_uuid = serializers.CharField(max_length=255)
+    discount_code = serializers.CharField(max_length=255)
 
 
 class PayOrdeRazorpayDao(serializers.Serializer):
@@ -12,12 +13,17 @@ class PayOrdeRazorpayDao(serializers.Serializer):
 
 class AddCartDao(serializers.Serializer):
     quantity = serializers.IntegerField()
+    color = serializers.CharField(max_length=255)
 
 
 class WarrantyDao(serializers.Serializer):
     frame_number = serializers.CharField(max_length=255)
     purchase_date = serializers.DateField()
     dealer_or_online = serializers.CharField(max_length=255)
+    
+    
+class PromocodeDao(serializers.Serializer):
+    discount_code = serializers.CharField(max_length=255)
 
 
 class InsuranceDao(serializers.Serializer):
