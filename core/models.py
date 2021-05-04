@@ -267,6 +267,7 @@ class Product(models.Model):
     bg_image = models.CharField(
         max_length=255, null=True, blank=True, default='')
     title = models.CharField(max_length=255, null=True, blank=True, default='')
+    brochure = models.CharField(max_length=255, null=True, blank=True, default='')
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     is_archived = models.BooleanField(default=False)
