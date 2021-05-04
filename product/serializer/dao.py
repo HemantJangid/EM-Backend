@@ -17,9 +17,12 @@ class AddCartDao(serializers.Serializer):
 
 
 class WarrantyDao(serializers.Serializer):
+    name = serializers.CharField(max_length=255)
+    phone = serializers.CharField(max_length=255)
     frame_number = serializers.CharField(max_length=255)
     purchase_date = serializers.DateField()
     dealer_or_online = serializers.CharField(max_length=255)
+    dealer_or_platform = serializers.CharField(max_length=255)
     
     
 class PromocodeDao(serializers.Serializer):
@@ -27,8 +30,12 @@ class PromocodeDao(serializers.Serializer):
 
 
 class InsuranceDao(serializers.Serializer):
+    name = serializers.CharField(max_length=255)
+    phone = serializers.CharField(max_length=255)
     frame_number = serializers.CharField(max_length=255)
-
+    purchase_date = serializers.DateField()
+    dealer_or_online = serializers.CharField(max_length=255)
+    dealer_or_platform = serializers.CharField(max_length=255)
 
 class TestRideBookingDao(serializers.Serializer):
     name = serializers.CharField(max_length=255)

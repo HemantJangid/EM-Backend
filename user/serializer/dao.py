@@ -89,3 +89,11 @@ class UserProfileDao(serializers.Serializer):
         max_length=255, required=False, default='', allow_blank=True)
     email = serializers.CharField(max_length=255)
     phone_number = serializers.CharField(max_length=14)
+    
+    
+class CommunityUserDao(serializers.Serializer):
+    name = serializers.CharField(max_length=255)
+    email = serializers.CharField(max_length=255)
+    frame_number = serializers.CharField(max_length=255)
+    phone = serializers.CharField(max_length=255)
+    city = serializers.CharField(max_length=255)

@@ -4,7 +4,7 @@ from django.contrib import admin
 from django.urls import reverse
 from django.utils.html import format_html
 from .models import Product, ProductContent, Order, OrderItem, Transaction, Warranty, Lead, Partner, EmailLeadLogs, Dealer, \
-    TestRideBooking, ProductInfo, Blog, Promocode, ProductColors
+    TestRideBooking, ProductInfo, Blog, Promocode, ProductColors, InsuranceRequest, CommunityUser
 from django_better_admin_arrayfield.admin.mixins import DynamicArrayMixin
 from csvexport.actions import csvexport
 
@@ -144,8 +144,50 @@ class TransactionAdmin(admin.ModelAdmin):
 
 @admin.register(Warranty)
 class WarrantyAdmin(admin.ModelAdmin):
-    readonly_fields = ('id', 'frame_number', 'user',
-                       'purchase_date', 'dealer_or_online')
+    search_fields = ['name', 'frame_number']
+    list_display = ('name', 'frame_number', 'phone',
+                    'purchase_date', 'dealer_or_online', 'dealer_or_platform', 'created_on')
+    
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+    
+
+@admin.register(CommunityUser)
+class CommunityUserAdmin(admin.ModelAdmin):
+    search_fields = ['name',]
+    list_display = ('name', 'frame_number', 'email',
+                    'phone', 'city')
+    
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
+    
+
+@admin.register(InsuranceRequest)
+class InsuranceAdmin(admin.ModelAdmin):
+    search_fields = ['name', 'frame_number']
+    list_display = ('name', 'frame_number', 'phone',
+                    'purchase_date', 'dealer_or_online', 'dealer_or_platform', 'created_on')
+    
+    def has_change_permission(self, request, obj=None):
+        return False
+
+    def has_add_permission(self, request, obj=None):
+        return False
+
+    def has_delete_permission(self, request, obj=None):
+        return False
 
 
 @admin.register(Lead)

@@ -466,9 +466,12 @@ class Transaction(models.Model):
 class Warranty(models.Model):
     user = models.ForeignKey(
         User, on_delete=models.CASCADE, blank=True, null=True)
+    name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=255)
     frame_number = models.CharField(max_length=255, unique=True)
     purchase_date = models.DateField()
     dealer_or_online = models.CharField(max_length=255)
+    dealer_or_platform = models.CharField(max_length=255)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
 
@@ -522,17 +525,37 @@ class Partner(models.Model):
 
 
 class InsuranceRequest(models.Model):
-    user = models.ForeignKey(
-        User, on_delete=models.CASCADE, blank=True, null=True)
+    name = models.CharField(max_length=255)
+    phone = models.CharField(max_length=255)
     frame_number = models.CharField(max_length=255, unique=True)
+    purchase_date = models.DateField()
+    dealer_or_online = models.CharField(max_length=255)
+    dealer_or_platform = models.CharField(max_length=255)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
-
+    
     class Meta:
         db_table = 'insurance_request'
 
     def __str__(self):
         return str(self.frame_number)
+    
+
+class CommunityUser(models.Model):
+    name = models.CharField(max_length=255)
+    email = models.CharField(max_length=255, unique=True)
+    frame_number = models.CharField(max_length=255, unique=True)
+    phone = models.CharField(max_length=255)
+    city = models.CharField(max_length=255)
+    dealer_or_platform = models.CharField(max_length=255)
+    created_on = models.DateTimeField(auto_now_add=True)
+    updated_on = models.DateTimeField(auto_now=True)
+    
+    class Meta:
+        db_table = 'community_user'
+
+    def __str__(self):
+        return str(self.name)
 
 
 class EmailLeadLogs(models.Model):

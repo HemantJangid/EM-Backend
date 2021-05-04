@@ -21,8 +21,11 @@ class WarrantyView(APIView):
 
         print(attributes.data)
         warranty = Warranty.objects.create(user=request.user,
+                                           name=attributes.data["name"],
+                                           phone=attributes.data["phone"],
                                            frame_number=attributes.data["frame_number"],
                                            purchase_date=attributes.data["purchase_date"],
+                                           dealer_or_platform=attributes.data["dealer_or_platform"],
                                            dealer_or_online=attributes.data["dealer_or_online"])
         warranty.save()
 
