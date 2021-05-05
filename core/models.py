@@ -548,7 +548,6 @@ class CommunityUser(models.Model):
     frame_number = models.CharField(max_length=255, unique=True)
     phone = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
-    dealer_or_platform = models.CharField(max_length=255)
     created_on = models.DateTimeField(auto_now_add=True)
     updated_on = models.DateTimeField(auto_now=True)
     
